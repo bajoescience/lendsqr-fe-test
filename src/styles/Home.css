@@ -1,0 +1,146 @@
+
+.homepage {
+  display: flex;
+  min-height: 100vh;
+  font-family: var(--FONT-FAMILY);
+}
+
+.section-1 {
+  /* background-color: aqua; */
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.hm-icon-con {
+  margin-left: 2rem;
+  margin-bottom: 10.7vh;
+  margin-top: 8.2vh;
+}
+
+.hm-img-con {
+  width: 100%;
+}
+
+/* Form Designs */
+
+.form-con {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form-con form {
+  width: var(--FORM-WIDTH);
+  margin: 0.5rem;
+}
+
+.form-con form h2 {
+  color: var(--MAIN_COLOR);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.form-con form p {
+  margin-top: 0.7rem;
+  margin-bottom: 3.1rem;
+  color: var(--LIGHT);
+  font-size: 1.25rem;
+  line-height: 1.7rem;
+}
+
+/* common styles for the input elemnts */
+.inputs {
+  height: var(--INPUT-HEIGHT);
+  padding-left: 1rem;
+  margin: 0.6rem 0;
+
+  border-radius: 5px;
+  border: 2px solid var(--LIGHT-OP);
+
+  color: var(--LIGHT);
+
+  font-size: 0.9rem;
+}
+
+.form-input-con input[type=text] {
+  width: 100%;
+}
+
+/* Share the password input and show button on the asme line
+as a ratio of 80:20 */
+
+.password-entry-con {
+  position: relative;
+}
+
+.form-input-con input[type=password] {
+  width: 100%;
+}
+
+.form-input-con .show-button {
+  height: var(--INPUT-HEIGHT);
+
+  position: absolute;
+  top: 42%;
+  right: 13.7%;
+  
+
+  border: none;
+
+  background-color: white;
+  color: var(--SEC-COLOR);
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 10%;
+  
+  width: 0;
+  height: 0;
+
+  cursor: pointer;
+}
+
+/* Style the remaining part of the form */
+
+.form-input-con .forgot-button {
+  border: none;
+
+  background-color: white;
+  color: var(--SEC-COLOR);
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  margin-bottom: 1.9rem;
+  margin-top: 0.9rem;
+
+  cursor: pointer;
+}
+
+.form-input-con .login-button {
+  border: none;
+  border-radius: 0.5rem;
+
+  width: 100%;
+  height: var(--INPUT-HEIGHT);
+
+  background-color: var(--SEC-COLOR);
+  color: white;
+}
+
+
+/* Make the home page into two to fit smaller screen sizes */
+@media (max-width: 1024px) {
+  .homepage {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+  }
+}

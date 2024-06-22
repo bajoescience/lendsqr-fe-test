@@ -1,38 +1,25 @@
-.App {
-  text-align: center;
+/* CSS Reset */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Default CSS values */
+:root {
+  --HM-SECTION-BOX-SPACING: 6.6rem 4.2rem;
+  --LIGHT: rgba(84, 95, 125, 1);
+  --LIGHT-OP: rgba(84, 95, 125, 0.15);
+  --MAIN_COLOR: rgb(33, 63, 125);
+  --SEC-COLOR: rgb(57, 205, 204);
+  --INPUT-HEIGHT: 3.2rem;
+  --FONT-FAMILY: Avenir Next, sans-serif;
+  --SEC-FONT-FAMILY: 'Work Sans', sans-serif;
+  --FORM-WIDTH: 467px;
+  --THIRD-COLOR: rgba(33, 63, 125, 1);
+  --HEADER-BORDER: 1px solid rgba(33, 63, 125, 0.2);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+/* Header styles code Starts Here */
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

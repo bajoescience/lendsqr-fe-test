@@ -1,0 +1,116 @@
+
+.header-nav {
+  /* background-color: bisque; */
+
+  display: flex;
+  align-items: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
+
+  height: 100px;
+}
+
+.nav-section-1 {
+  padding-left: 4%;
+  width: 20%;
+}
+
+.nav-section-2 {
+  flex-grow: 1;
+
+  padding-left: 4%;
+}
+
+/* This container acts as an anchor to the 
+positioned button */
+.search-bar-con {
+  position: relative;
+  width: fit-content;
+}
+
+.search-bar {
+  width: min(400px, 39vw);
+  min-width: 200px;
+  height: 40px;
+
+  padding-left: 2rem;
+
+  font-family: var(--SEC-FONT-FAMILY);
+
+  border: var(--HEADER-BORDER);
+  border-radius: 8px;
+
+}
+
+/* Top and Bottom position set to 1 to account
+for the   */
+.search-bar-button {
+  background-color: var(--SEC-COLOR);
+
+  width: 3.5rem;
+
+  border: var(--HEADER-BORDER);
+  border-left: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+
+}
+
+
+.nav-section-3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: max(22%, 250px);
+  min-width: 200px;
+  padding-right: 4%;
+}
+
+.nav-section-3 a {
+  color: var(--THIRD-COLOR);
+  font-size: 1rem;
+}
+
+.nav-section-3 a:visited {
+  color: hsla(280, 58%, 31%, 1);
+}
+
+.nav-section-3 a:hover {
+  color: hsla(200, 58%, 31%, 1);
+}
+
+
+.user-profile {
+  display: flex;
+  align-items: center;
+} 
+
+/* Put spacing in between the profle elements */
+.profile-spac {
+  margin-right: 0.5rem;
+}
+
+.profile-pic {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+}
+
+
+/* Make the search bar smaller to fit smaller screen sizes */
+@media (max-width: 768px) {
+  .nav-section-1 {
+    padding-left: 2%;
+    width: 20%;
+  }
+}
