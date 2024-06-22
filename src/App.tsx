@@ -12,8 +12,8 @@ import './styles/Header.css'
 const App = () => {
   return (
     <>
-      <HomePage />
-      {/* <Header /> */}
+      {/* <HomePage /> */}
+      <Header />
     </>
   )
 }
