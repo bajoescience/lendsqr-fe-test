@@ -26,10 +26,12 @@ const Header = () => {
           <div>
             <a href="#">DOCS</a>
           </div>
+
           <div>
-            <img src={notifIcon} alt="Notification" />
+              <img src={notifIcon} className='pointer' alt="Notification" />
           </div>
-          <div className='user-profile'>
+          
+          <div className='user-profile pointer'>
             <div className='profile-spac'>
               <img src={profilePic} className='profile-pic' alt="ProfilePic" width={48} height={96} />
             </div>
