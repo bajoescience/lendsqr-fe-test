@@ -16,7 +16,7 @@ const Header = () => {
         <section className='nav-section-2'>
           <div className='search-bar-con'>
             <input type="text" className='search-bar' placeholder='Search For Anything' />
-            <button className='search-bar-button'>
+            <button className='search-bar-button pointer'>
               <img src={searchIcon} alt="Search"  />
             </button>
           </div>
@@ -24,24 +24,23 @@ const Header = () => {
         </section>
         <section className='nav-section-3'>
           <div>
-            <a href="#">DOCS</a>
+            <a href="#" className='docs header-element-disappear'>DOCS</a>
           </div>
 
-          <div>
+          <div className='header-element-disappear'>
               <img src={notifIcon} className='pointer' alt="Notification" />
           </div>
-          
+
           <div className='user-profile pointer'>
             <div className='profile-spac'>
               <img src={profilePic} className='profile-pic' alt="ProfilePic" width={48} height={96} />
             </div>
-            <div className='profile-spac'>
+            <div className='profile-spac header-element-disappear'>
               {profileName}
             </div>
             <div>
               <img src={dropdown} alt="Dropdown menu" />
             </div>
-
           </div>
         </section>
       </nav>

@@ -1,26 +1,25 @@
 
 .header-nav {
-  /* background-color: bisque; */
+  background-color: white;
 
   display: flex;
   align-items: center;
 
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
 
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
 
-  height: 100px;
+  height: var(--HEADER-HEIGHT);
+  z-index: 100;
 }
 
-.pointer {
-  cursor: pointer;
-}
+
 
 .nav-section-1 {
-  padding-left: 4%;
-  width: 20%;
+  padding-left: 2%;
+  width: max(20%, 200px);
 }
 
 .nav-section-2 {
@@ -36,7 +35,7 @@ positioned button */
   width: fit-content;
 }
 
-.search-bar {
+.search-bar-con input {
   width: min(400px, 39vw);
   min-width: 200px;
   height: 40px;
@@ -47,7 +46,11 @@ positioned button */
 
   border: var(--HEADER-BORDER);
   border-radius: 8px;
+}
 
+/* When search bar is focused, replaceoutline */
+.search-bar-con input:focus {
+  outline: var(--HEADER-BORDER);
 }
 
 /* Top and Bottom position set to 1 to account
@@ -75,13 +78,16 @@ for the   */
   align-items: center;
   justify-content: space-between;
   width: max(22%, 250px);
-  min-width: 200px;
   padding-right: 4%;
+
+  color: var(--THIRD-COLOR);
+  font-family: var(--SEC-FONT-FAMILY);
 }
 
 .nav-section-3 a, .nav-section-3 a:visited {
   color: var(--THIRD-COLOR);
   font-size: 1rem;
+  font-family: var(--THIRD-FONT-FAMILY);
 }
 
 .nav-section-3 a:hover {
@@ -114,7 +120,31 @@ for the   */
 /* Make the search bar smaller to fit smaller screen sizes */
 @media (max-width: 768px) {
   .nav-section-1 {
-    padding-left: 2%;
-    width: 20%;
+    padding-left: 1%;
+  }
+
+  .nav-section-3 {
+    width: max(22%, 200px);
+    padding-right: 1%;
+  }
+
+  /* Create a class that can make items disappear from the page  */
+  .header-element-disappear {
+    position: absolute;
+    left: -5000px;
+  }
+
+  .search-bar {
+    width: min(400px, 39vw);
+    min-width: 200px;
+    height: 40px;
+  
+    padding-left: 0.5rem;
+  
+    font-family: var(--SEC-FONT-FAMILY);
+  
+    border: var(--HEADER-BORDER);
+    border-radius: 8px;
+  
   }
 }
