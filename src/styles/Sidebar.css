@@ -1,0 +1,107 @@
+/* Sidebar styling starts here */
+.sidebar-nav {
+  position: absolute;
+  top: var(--HEADER-HEIGHT);
+  bottom: 0;
+
+  width: max(20%, 100px);
+
+  font-family: var(--SEC-FONT-FAMILY);
+
+  color: var(--THIRD-COLOR);
+
+  overflow-y: scroll;
+}
+
+.sidebar-sect {
+  padding-top: 20px;
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+.section-title {
+  padding-left: var(--SIDEBAR-LEFT-PADDING);
+}
+
+.sidebar-child-con {
+  height: 2.5rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  opacity: 0.6;
+
+  cursor: pointer;
+
+  position: relative;
+
+  margin: 10px 0;
+
+}
+
+/* This style will wrap the sidebar link when active */
+.active {
+  background-color: rgba(57, 205, 204, 0.1);
+  opacity: 1;
+}
+
+/* This add an element that highlights the active
+sidebar link */
+.active::before {
+  content: '';
+
+  width: 3px;
+  height: 2.5rem;
+  
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  background-color: var(--SEC-COLOR);
+}
+
+/* Styling the div's of the individual element */
+.sidebar-link-icon {
+  margin-left: max(var(--SIDEBAR-LEFT-PADDING), 30px);
+}
+
+.sidebar-link-end-icon {
+  margin-left: 10px;
+}
+
+.sidebar-nav-name {
+  margin-left: 0.63rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar-nav-name {
+    margin-left: 0.63rem;
+    font-size: 1rem;
+    position: absolute;
+    left: -5000px;
+  }
+
+  .sidebar-child-con {
+    height: 2.5rem;
+    width: 100%;
+  
+    display: flex;
+    align-items: center;
+  
+    opacity: 0.6;
+  
+    cursor: pointer;
+  
+    position: relative;
+  
+    margin: 10px 0;
+  
+  }
+}
+
+/* Additional designs for the switch organization */
+.add-padding {
+  margin-bottom: 40px;
+}

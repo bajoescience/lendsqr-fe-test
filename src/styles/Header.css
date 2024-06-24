@@ -81,7 +81,7 @@ for the   */
   padding-right: 4%;
 
   color: var(--THIRD-COLOR);
-  font-family: var(--SEC-FONT-FAMILY);
+  font-family: var(--THIRD-FONT-FAMILY);
 }
 
 .nav-section-3 a, .nav-section-3 a:visited {
@@ -102,7 +102,37 @@ for the   */
 .user-profile {
   display: flex;
   align-items: center;
+
+  font-weight: 500;
+  font-family: var(--SEC-FONT-FAMILY);
+
+  position: relative;
 } 
+
+/* Here, we create the logout button to appear on hover
+and dissapear after leaving  */
+.user-profile .logout-con {
+  display: none;
+
+  background-color: rgba(57, 205, 204, 0.2);
+
+  height: 50px;
+  width: 100%;
+
+  position: absolute;
+  top: calc((var(--HEADER-HEIGHT) / 2) + 2px);
+
+  transition: opacity 0.15s;
+}
+
+.user-profile:hover .logout-con {
+  display: grid;
+  place-content: center;
+}
+
+.user-profile:active .logout-con {
+  opacity: 0.6;
+}
 
 
 /* Put spacing in between the profle elements */

@@ -41,6 +41,9 @@ const Header = () => {
             <div>
               <img src={dropdown} alt="Dropdown menu" />
             </div>
+            <div className='logout-con'>
+              Log Out
+            </div>
           </div>
         </section>
       </nav>
