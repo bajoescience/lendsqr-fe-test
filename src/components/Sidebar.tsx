@@ -25,6 +25,8 @@ import switchOrganizationIcon from '../img/Switch Organzation.png'
 import endIcon from '../img/end.png'
 import dashboardIcon from '../img/Dashboard.png'
 
+import '../styles/Sidebar.css'
+
 
 const Sidebar = () => {
   

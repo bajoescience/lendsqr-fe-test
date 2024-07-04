@@ -4,6 +4,9 @@ import notifIcon from '../img/notif-icon.png'
 import profilePic from '../img/profile.jpg'
 import dropdown from '../img/dropdown-icon.png'
 
+import '../styles/Header.css'
+
+
 
 const Header = () => {
   const profileName = 'Joseph'

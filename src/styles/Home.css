@@ -54,6 +54,22 @@
   line-height: 1.7rem;
 }
 
+.form-input-con {
+  position: relative;
+}
+
+/* Display Error messages */
+.err-message {
+  position: absolute;
+  top: -10px;
+  left: 5px;
+  color: red;
+
+  font-size: small;
+  z-index: 100;
+}
+
+
 /* common styles for the input elemnts */
 .inputs {
   height: var(--INPUT-HEIGHT);
@@ -71,6 +87,8 @@
 .form-input-con input[type=text] {
   width: 100%;
 }
+
+
 
 /* Share the password input and show button on the asme line
 as a ratio of 80:20 */
@@ -133,6 +151,8 @@ as a ratio of 80:20 */
 
   background-color: var(--SEC-COLOR);
   color: white;
+
+  cursor: pointer;
 }
 
 
