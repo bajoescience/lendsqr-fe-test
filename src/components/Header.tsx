@@ -1,3 +1,5 @@
+import { TContext } from '../types'
+
 import companyIcon from '../img/logo.png'
 import searchIcon from '../img/search-icon.png'
 import notifIcon from '../img/notif-icon.png'
@@ -5,11 +7,19 @@ import profilePic from '../img/profile.jpg'
 import dropdown from '../img/dropdown-icon.png'
 
 import '../styles/Header.css'
+import { getNameFromEmail } from '../helper'
 
 
 
-const Header = () => {
-  const profileName = 'Joseph'
+const Header = ({userData}: { userData: TContext }) => {
+  
+  const profileName = getNameFromEmail(userData.user?.email)
+
+  // Handle logging out user
+  const handleLogout  = (e : React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    localStorage.removeItem('loggedUser')
+    userData.setUser(null)
+  }
   return (
     <>
       <nav className='header-nav' aria-label='primaty-navigation'>
@@ -44,7 +54,7 @@ const Header = () => {
             <div>
               <img src={dropdown} alt="Dropdown menu" />
             </div>
-            <div className='logout-con'>
+            <div className='logout-con' onClick={handleLogout}>
               Log Out
             </div>
           </div>

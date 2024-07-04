@@ -7,7 +7,7 @@ const Dashboard = () => {
   
   return (
     <>
-       <Nav />
+       <Nav userData={context}/>
     </>
   )
 }

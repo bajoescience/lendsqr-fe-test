@@ -1,11 +1,12 @@
 import Header from './Header'
 import Sidebar from './Sidebar'
+import { TContext } from '../types'
 
 
-const Nav = () => {
+const Nav = (props :{ userData: TContext}) => {
   return (
     <>
-      <Header />
+      <Header userData={props.userData} />
       <Sidebar />
     </>
   )
