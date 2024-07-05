@@ -11,7 +11,7 @@ const SidebarLink = ({link, activeNow, setActiveNow} :SidebarLinkProps) => {
   const navigate = useNavigate() 
 
   // Identify the url for the link component
-  const url = link.name.toLocaleLowerCase().replace(' ', '-')
+  const url = link.name.toLocaleLowerCase().replaceAll(' ', '-')
 
   // If this component is clicked, navigate to the url
   const handleClick = (e :React.MouseEvent<HTMLDivElement, MouseEvent>) => {
