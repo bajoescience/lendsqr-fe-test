@@ -8,3 +8,10 @@ export type TContext = {
   user: TUser | null,
   setUser: React.Dispatch<React.SetStateAction<TUser | null>>
 }
+
+export type TSidebarLink = {
+  name: string,
+  icon: string,
+  active?: boolean,
+  url?: string
+}

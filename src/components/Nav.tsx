@@ -7,7 +7,7 @@ const Nav = (props :{ userData: TContext}) => {
   return (
     <>
       <Header userData={props.userData} />
-      <Sidebar />
+      <Sidebar  />
     </>
   )
 }

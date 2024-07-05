@@ -4,16 +4,13 @@ import './index.css';
 import App from './App';
 
 import {
-  LoaderFunction,
   RouteObject,
   createBrowserRouter as Router,
   RouterProvider,
-  redirect
 } from "react-router-dom";
 import Auth from './routes/Auth';
 import Dashboard from './routes/Dashboard';
-import { getUsers } from './services/user';
-import { TUser } from './types';
+import User from './routes/User';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,7 +25,11 @@ const routeTree : RouteObject[] = [{
     element: <Auth />
   }, {
     path: 'dashboard',
-    element: <Dashboard />
+    element: <Dashboard />,
+    children: [{
+      path: ':link',
+      element: <User />,
+    }]
   }]
 }]
 

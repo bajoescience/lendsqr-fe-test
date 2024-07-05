@@ -21,6 +21,7 @@
   --HEADER-BORDER: 1px solid rgba(33, 63, 125, 0.2);
   --HEADER-HEIGHT: 100px;
   --SIDEBAR-LEFT-PADDING: 10.5%;
+  --NON-SIDEBAR-PAGE-PADDING: 4.17%;
 
   /* Define the limits for the app width and height */
   --MIN-APP-WIDTH: 481px;

@@ -6,19 +6,6 @@ import { useEffect, useState } from 'react'
 import { TUser, TContext } from './types'
 
 
-const Main = () => {
-  return (
-    <>
-      <div className='main'>
-        {/* This contains the main area of the Page */}
-        
-      </div>
-    </>
-  )
-}
-
-
-
 const App = () => {
   const [user, setUser] = useState<TUser | null>(null)
   
@@ -37,7 +24,7 @@ const App = () => {
       const user :TUser = JSON.parse(loggedUserJSON)
       setUser(user) 
     }
-    navigate('dashboard')
+    navigate('dashboard/users')
   }, [user, navigate])
 
   // Props to pass to lower nav children

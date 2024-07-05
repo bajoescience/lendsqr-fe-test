@@ -18,14 +18,14 @@
 
 
 .nav-section-1 {
-  padding-left: 2%;
+  padding-left: calc(var(--NON-SIDEBAR-PAGE-PADDING) / 2);
   width: max(20%, 200px);
 }
 
 .nav-section-2 {
   flex-grow: 1;
 
-  padding-left: 4%;
+  padding-left: var(--NON-SIDEBAR-PAGE-PADDING);
 }
 
 /* This container acts as an anchor to the 
@@ -78,9 +78,10 @@ for the   */
   align-items: center;
   justify-content: space-between;
   width: max(22%, 250px);
-  padding-right: 4%;
+  padding-right: var(--NON-SIDEBAR-PAGE-PADDING);
 
   color: var(--THIRD-COLOR);
+  font-size: 1rem;
   font-family: var(--THIRD-FONT-FAMILY);
 }
 
