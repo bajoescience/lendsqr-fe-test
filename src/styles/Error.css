@@ -1,6 +1,6 @@
 .errorPage {
   font-size: small;
-  min-height: calc(100vh - var(--HEADER-HEIGHT));
+  min-height: calc(70vh - var(--HEADER-HEIGHT));
 
   display: grid;
   place-content: center;

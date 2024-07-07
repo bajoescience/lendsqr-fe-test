@@ -35,16 +35,61 @@ body {
 }
 
 .dashboard {
-  padding-top: var(--HEADER-HEIGHT);
+  padding-top: calc(var(--HEADER-HEIGHT) + 60px);
   padding-left: 24.17%;
+  padding-right: var(--NON-SIDEBAR-PAGE-PADDING);
   background-color: rgba(33, 63, 125, 0.06);
 
   min-height: 100vh;
 }
 
 .main {
-
+  font-family: var(--SEC-FONT-FAMILY);
 }
+
+.main h2 {
+  font-weight: 500;
+  color: var(--MAIN_COLOR)
+}
+
+.box-display {
+  margin: 40px 0px;
+  color: var(--MAIN_COLOR);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.box {
+  height: 160px;
+  width: 240px;
+
+  border-radius: 4px;
+
+  padding: 30px;
+  padding-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: white
+}
+
+.box-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(84, 95, 125, 1)
+}
+
+.box-count {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+
+
 
 @import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
