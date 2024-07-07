@@ -1,14 +1,16 @@
 /* Sidebar styling starts here */
 .sidebar-nav {
-  position: absolute;
+  position: fixed;
   top: var(--HEADER-HEIGHT);
   bottom: 0;
+  left: 0;
 
   width: max(20%, 100px);
 
   font-family: var(--SEC-FONT-FAMILY);
 
   color: var(--THIRD-COLOR);
+  background-color: white;
 
   overflow-y: scroll;
 }

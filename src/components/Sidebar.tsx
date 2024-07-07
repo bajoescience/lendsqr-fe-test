@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom'
 const Sidebar = () => {
   // Get the current url parameter
   const {link} = useParams()
+  
 
   // Store the sidebar link name that is curently active
   const [activeNow, setActiveNow] = useState<string | undefined>(undefined)
@@ -40,14 +41,18 @@ const Sidebar = () => {
             </div>
           </div>
 
-          <div className='sidebar-child-con'>
+          {/* <div className='sidebar-child-con'>
             <div className='sidebar-link-icon'>
               <img src={dashboardIcon} alt="dashboard Icon" />
             </div>
             <div className='sidebar-nav-name'>
               Dashboard
             </div>
-          </div>
+          </div> */}
+          <SidebarLink
+          link={{name: 'Dashboard', icon: dashboardIcon}}
+          activeNow={activeNow}
+          setActiveNow={setActiveNow} />
         </section>
 
         {/* Dynamically render the sidebar link containers */}

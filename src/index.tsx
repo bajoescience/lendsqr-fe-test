@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import Auth from './routes/Auth';
 import Dashboard from './routes/Dashboard';
-import User from './routes/User';
+import Main from './routes/Main';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,7 +28,10 @@ const routeTree : RouteObject[] = [{
     element: <Dashboard />,
     children: [{
       path: ':link',
-      element: <User />,
+      element: <Main />,
+    }, {
+      path: '',
+      element: <Main />
     }]
   }]
 }]

@@ -24,7 +24,7 @@ const Header = ({userData}: { userData: TContext }) => {
     <>
       <nav className='header-nav' aria-label='primaty-navigation'>
         <section className='nav-section-1'>
-          <img src={companyIcon} alt="Company Icon" width={145} height={30} />
+          <img src={companyIcon} alt="Company Icon" width={145} height={30} loading='lazy'/>
         </section>
         <section className='nav-section-2'>
           <div className='search-bar-con'>

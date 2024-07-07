@@ -1,4 +1,4 @@
-import {  useOutletContext } from 'react-router-dom'
+import {  Outlet, useOutletContext } from 'react-router-dom'
 import Nav from '../components/Nav'
 import { TContext } from '../types'
 
@@ -8,6 +8,9 @@ const Dashboard = () => {
   return (
     <>
        <Nav userData={context}/>
+        <div className='dashboard'>
+          <Outlet />
+        </div>
     </>
   )
 }

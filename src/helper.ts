@@ -34,6 +34,8 @@ export const getNameFromEmail = (email :string | undefined): string | undefined 
   return email?.substring(0, email?.indexOf("@"));
 }
 
+export const nameToUrl = (name :string) => name.toLocaleLowerCase().replaceAll(' ', '-')
+
 type TSidebarArray = {
   title: string,
   children: TSidebarLink[]

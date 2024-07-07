@@ -17,12 +17,12 @@ const Auth = () => {
   const {user, setUser}: TContext = useOutletContext()
   const navigate = useNavigate()
 
-  // If user exists, navigate back to original page
+  // If user exists, clear user for user to register again
   useEffect(() => {
     if (user) {
-      navigate('/dashboard')
+      localStorage.removeItem('loggedUser')
+      setUser(null)
     }
-    
   }, [user, navigate])
   
 
@@ -66,6 +66,7 @@ const Auth = () => {
     setErrorMessage(null)
 
     localStorage.setItem('loggedUser', JSON.stringify(user))
+    navigate('/')
   }
   
   

@@ -1,0 +1,13 @@
+.errorPage {
+  font-size: small;
+  min-height: calc(100vh - var(--HEADER-HEIGHT));
+
+  display: grid;
+  place-content: center;
+}
+
+.flex-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

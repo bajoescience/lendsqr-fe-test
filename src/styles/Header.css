@@ -6,12 +6,13 @@
   align-items: center;
 
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
+  height: var(--HEADER-HEIGHT);
 
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
 
-  height: var(--HEADER-HEIGHT);
   z-index: 100;
 }
 

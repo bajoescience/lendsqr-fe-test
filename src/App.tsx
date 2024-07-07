@@ -1,7 +1,7 @@
 // This are all the style files
 import './App.css'
 
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useMatch, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { TUser, TContext } from './types'
 
@@ -10,6 +10,9 @@ const App = () => {
   const [user, setUser] = useState<TUser | null>(null)
   
   const navigate = useNavigate()
+  const match = useMatch('/')
+  
+  
   
   // TODO: Move to loader property in nav tree
   // Allows non-exisiting user to register
@@ -21,11 +24,13 @@ const App = () => {
         navigate('auth')
         return
       }
-      const user :TUser = JSON.parse(loggedUserJSON)
-      setUser(user) 
+      const newUser :TUser = JSON.parse(loggedUserJSON)
+      setUser(newUser) 
     }
-    navigate('dashboard/users')
-  }, [user, navigate])
+    if (match) {
+      navigate('dashboard')
+    }
+  }, [user, match, navigate])
 
   // Props to pass to lower nav children
   const context : TContext = {
