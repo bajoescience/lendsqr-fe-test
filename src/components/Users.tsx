@@ -3,6 +3,8 @@ import activeusersIcon from '../img/ACTIVE USERS.png'
 import loanusersIcon from '../img/USERS WITH LOANS.png'
 import savingusersIcon from '../img/USERS WITH SAVINGS.png'
 
+import '../styles/User.css'
+
 type TDisplayStat = {
   icon: string,
   name: string,
@@ -48,7 +50,14 @@ const Users = () => {
     <div className="main">
       <h2>Users</h2> 
       <div className="box-display">
-        {displayStats.map(stat => <UserBox stat={stat} />)}
+        {displayStats.map(stat => <UserBox key={stat.name} stat={stat} />)}
+      </div>
+      <div className='user-table'>
+        <table>
+          <tr>
+            <th></th>
+          </tr>
+        </table>
       </div>
     </div>
   )
