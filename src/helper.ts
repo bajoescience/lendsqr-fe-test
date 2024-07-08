@@ -36,6 +36,12 @@ export const getNameFromEmail = (email :string | undefined): string | undefined 
 
 export const nameToUrl = (name :string) => name.toLocaleLowerCase().replaceAll(' ', '-')
 
+
+// These are the table headers for the users page
+export const tHeaders = ['organization', 'username', 'email', 'phone number', 'date joined', 'status'] as const
+
+
+// Store each section of sidebar as a type array in sidebarsection
 type TSidebarArray = {
   title: string,
   children: TSidebarLink[]

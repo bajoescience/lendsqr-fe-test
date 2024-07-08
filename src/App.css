@@ -12,12 +12,12 @@
   --LIGHT-OP: rgba(84, 95, 125, 0.15);
   --MAIN_COLOR: rgb(33, 63, 125);
   --SEC-COLOR: rgb(57, 205, 204);
+  --THIRD-COLOR: rgb(33, 63, 125);
   --INPUT-HEIGHT: 3.2rem;
   --FONT-FAMILY: Avenir Next, sans-serif;
   --SEC-FONT-FAMILY: 'Work Sans', sans-serif;
   --THIRD-FONT-FAMILY: 'Roboto', sans-serif;
   --FORM-WIDTH: 467px;
-  --THIRD-COLOR: rgb(33, 63, 125);
   --HEADER-BORDER: 1px solid rgba(33, 63, 125, 0.2);
   --HEADER-HEIGHT: 100px;
   --SIDEBAR-LEFT-PADDING: 10.5%;
@@ -28,7 +28,7 @@
   --MIN-APP-HEIGHT: 100vh;
 }
 
-body {
+.root {
   min-height: 100vh;
 }
 

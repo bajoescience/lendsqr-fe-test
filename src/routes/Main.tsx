@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom"
 import { nameToUrl, sidebarSection } from "../helper"
 import Error from "../components/Error"
-import Users from "../components/Users"
+// import Users from "../components/Users"
+import { lazy } from "react"
+const Users = lazy(() => import("../components/Users"))
 
 // Get all the links from the sidebar section
 let allLinks : string[] = []

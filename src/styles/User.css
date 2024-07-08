@@ -7,6 +7,7 @@
   color: var(--MAIN_COLOR)
 }
 
+/* Styles for the box display */
 .box-display {
   margin: 40px 0px;
   color: var(--MAIN_COLOR);
@@ -16,7 +17,7 @@
   justify-content: space-between;
 }
 
-/* min(128px, 1%, 240px) */
+
 .box {
   height: 160px;
   width: clamp(135px, 23.3%, 240px);
@@ -36,7 +37,7 @@
 .box-name {
   font-size: 0.875rem;
   font-weight: 500;
-  color: rgba(84, 95, 125, 1)
+  color: var(--LIGHT)
 }
 
 .box-count {
@@ -50,4 +51,64 @@
     padding-right: 5px;
     padding-left: 10px;
   } 
+}
+
+/* Styles for the table */
+.table-con {
+  overflow-y: auto;
+  background-color: white;
+  color: var(--LIGHT);
+}
+
+.table-con table {
+  width: 977px;
+  margin: 30px 30px;
+}
+
+.table-con thead th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding-bottom: 15px;
+}
+
+.table-con thead th .con {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-con tbody td{
+  padding: 15px 0;
+  font-size: 0.875rem;
+}
+
+.table-con tbody .select{
+  padding-left: 30px;
+}
+
+.status-button {
+  border: none;
+  padding: 6px 12px;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.inactive {
+  background-color: rgba(84, 95, 125, 0.1);
+  color: rgba(84, 95, 125, 1);
+}
+
+.actived {
+  background-color: rgba(57, 205, 98, 0.1);
+  color: rgba(57, 205, 98, 1);
+}
+
+.blacklisted {
+  background-color: rgba(228, 3, 59, 0.1);
+  color: rgba(228, 3, 59, 1);
+}
+
+.pending {
+  background-color: rgba(233, 178, 0, 0.1);
+  color: rgba(233, 178, 0, 1);
 }

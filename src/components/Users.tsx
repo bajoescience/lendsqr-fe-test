@@ -4,28 +4,17 @@ import loanusersIcon from '../img/USERS WITH LOANS.png'
 import savingusersIcon from '../img/USERS WITH SAVINGS.png'
 
 import '../styles/User.css'
+import filterIcon from '../img/filter.png'
+import selectIcon from '../img/selectIcon.png'
 
-type TDisplayStat = {
-  icon: string,
-  name: string,
-  count: number
-}
+import { TDisplayStat, user } from '../types'
 
-const UserBox = ({stat} : {stat: TDisplayStat}) => {
-  return (
-    <div className="box">
-          <div>
-            <img src={stat.icon} alt="users" />
-          </div>
-          <div className='box-name'>
-            {stat.name}
-          </div>
-          <div className='box-count'>
-            {stat.count.toString()}
-          </div>
-    </div>
-  )
-}
+import { tHeaders } from '../helper'
+
+import UserBox from './UserBox'
+
+import StatusButton from './StatusButton'
+
 
 const Users = () => {
   const displayStats :TDisplayStat[] = [{
@@ -46,17 +35,56 @@ const Users = () => {
     icon: savingusersIcon
   }]
 
+  const users :user[] = [{
+    organization: 'lendsqr',
+    username: 'adedeji',
+    email: 'adedeji@lendsqr.com',
+    phone: '08078903721',
+    date: new Date(),
+    status: 'Active',
+  }]
+
   return (
     <div className="main">
       <h2>Users</h2> 
       <div className="box-display">
         {displayStats.map(stat => <UserBox key={stat.name} stat={stat} />)}
       </div>
-      <div className='user-table'>
+      <div className='table-con'>
         <table>
-          <tr>
-            <th></th>
-          </tr>
+          <thead>
+            <tr>
+              {tHeaders.map(title => <th colSpan={title === 'status' ? 2 : 1}>
+                  <div className='con' >
+                    {title.toUpperCase()}
+                    <img className='pointer' src={filterIcon} alt="filter" />
+                  </div>
+                </th>
+                
+              )}
+            </tr>
+          </thead>
+
+          {/* Render each user as a row */}
+          <tbody>
+            {users.map(user => {
+              return (
+                <tr>
+                  <td><div>{user.organization}</div></td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.date.toDateString()}</td>
+                  <td>
+                    <StatusButton status={user.status}/>
+                  </td>
+                  <td className='select'>
+                    <img className='pointer' src={selectIcon} alt="select" />
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
         </table>
       </div>
     </div>

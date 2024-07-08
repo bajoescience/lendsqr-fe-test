@@ -15,3 +15,20 @@ export type TSidebarLink = {
   active?: boolean,
   url?: string
 }
+
+export type TDisplayStat = {
+  icon: string,
+  name: string,
+  count: number | null
+}
+
+export type status = 'Active' | 'Inactive' | 'Pending' | 'Blacklisted'
+
+export type user = {
+  organization: string,
+  username: string,
+  email: string,
+  phone: string,
+  date: Date,
+  status: status,
+}
