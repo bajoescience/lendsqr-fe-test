@@ -22,13 +22,14 @@ export type TDisplayStat = {
   count: number | null
 }
 
-export type status = 'Active' | 'Inactive' | 'Pending' | 'Blacklisted'
+export type TStatus = 'Active' | 'Inactive' | 'Pending' | 'Blacklisted'
 
-export type user = {
+export type TUserObj = {
+  id?: string,
   organization: string,
   username: string,
   email: string,
   phone: string,
-  date: Date,
-  status: status,
+  date: string,
+  status: TStatus,
 }

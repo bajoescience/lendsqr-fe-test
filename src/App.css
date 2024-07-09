@@ -49,15 +49,7 @@
     padding-left: max(20%, 100px);
     padding-right: 0;
   }
-
-  .box {
-    width: fit-content; 
-    padding-right: 5px;
-    padding-left: 10px;
-  }
-  
-}
-
+} 
 
 
 

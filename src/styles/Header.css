@@ -116,7 +116,10 @@ and dissapear after leaving  */
 .user-profile .logout-con {
   display: none;
 
-  background-color: rgba(57, 205, 204, 0.2);
+  background-color: rgba(33, 63, 125, 0.1);
+  color: var(--MAIN_COLOR);
+
+  font-weight: 500;
 
   height: 50px;
   width: 100%;

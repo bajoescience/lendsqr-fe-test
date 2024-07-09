@@ -7,6 +7,7 @@ import {
   RouteObject,
   createBrowserRouter as Router,
   RouterProvider,
+  useParams,
 } from "react-router-dom";
 import Auth from './routes/Auth';
 import Dashboard from './routes/Dashboard';
@@ -28,7 +29,7 @@ const routeTree : RouteObject[] = [{
     element: <Dashboard />,
     children: [{
       path: ':link',
-      element: <Main />,
+      element: <Main />
     }, {
       path: '',
       element: <Main />

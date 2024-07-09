@@ -1,7 +1,7 @@
-import { status } from "../types"
+import { TStatus } from "../types"
 
 // Display the status button for each user diaplayed in the table
-const StatusButton = ({status} : {status: status}) => {
+const StatusButton = ({status} : {status: TStatus}) => {
   const className = () => {
     if (status === 'Inactive') return 'status-button inactive'
     else if (status === 'Active' ) return 'status-button actived'

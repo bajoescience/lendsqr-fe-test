@@ -4,16 +4,16 @@ import loanusersIcon from '../img/USERS WITH LOANS.png'
 import savingusersIcon from '../img/USERS WITH SAVINGS.png'
 
 import '../styles/User.css'
-import filterIcon from '../img/filter.png'
-import selectIcon from '../img/selectIcon.png'
 
-import { TDisplayStat, user } from '../types'
+import { TDisplayStat, TUserObj } from '../types'
 
-import { tHeaders } from '../helper'
 
 import UserBox from './UserBox'
+import UserTable from './UserTable'
 
-import StatusButton from './StatusButton'
+import { useEffect, useState } from 'react'
+
+import {clearUsers, createUser, getUsers} from '../services/user'
 
 
 const Users = () => {
@@ -35,14 +35,30 @@ const Users = () => {
     icon: savingusersIcon
   }]
 
-  const users :user[] = [{
-    organization: 'lendsqr',
-    username: 'adedeji',
-    email: 'adedeji@lendsqr.com',
-    phone: '08078903721',
-    date: new Date(),
-    status: 'Active',
-  }]
+  const [users, setUsers] = useState<TUserObj[] | null>(null)
+
+  // const newusers :TUserObj[] = [{
+  //   organization: 'lendsqr',
+  //   username: 'adedeji',
+  //   email: 'adedeji@lendsqr.com',
+  //   phone: '08078903721',
+  //   date: new Date().toUTCString(),
+  //   status: 'Active',
+  // }]
+  
+
+  // Fetch the available users from the database
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const fetchedUsers = await getUsers() as TUserObj[]
+      setUsers(fetchedUsers)
+      // for(let a = 0; a < 500 ; a++) {
+      //   await createUser(newusers[0])
+      // }
+    }
+
+    fetchUsers()
+  }, [])
 
   return (
     <div className="main">
@@ -50,43 +66,7 @@ const Users = () => {
       <div className="box-display">
         {displayStats.map(stat => <UserBox key={stat.name} stat={stat} />)}
       </div>
-      <div className='table-con'>
-        <table>
-          <thead>
-            <tr>
-              {tHeaders.map(title => <th colSpan={title === 'status' ? 2 : 1}>
-                  <div className='con' >
-                    {title.toUpperCase()}
-                    <img className='pointer' src={filterIcon} alt="filter" />
-                  </div>
-                </th>
-                
-              )}
-            </tr>
-          </thead>
-
-          {/* Render each user as a row */}
-          <tbody>
-            {users.map(user => {
-              return (
-                <tr>
-                  <td><div>{user.organization}</div></td>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{user.phone}</td>
-                  <td>{user.date.toDateString()}</td>
-                  <td>
-                    <StatusButton status={user.status}/>
-                  </td>
-                  <td className='select'>
-                    <img className='pointer' src={selectIcon} alt="select" />
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
+        <UserTable users={users} />
     </div>
   )
 }
