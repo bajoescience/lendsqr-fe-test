@@ -37,9 +37,10 @@
   padding-left: 24.17%;
   padding-right: var(--NON-SIDEBAR-PAGE-PADDING);
 
-  background-color: rgba(33, 63, 125, 0.06);
+  background-color: rgba(79, 114, 184, 0.06);
 
   min-height: 100vh;
+  width: 100%;
 }
 
 

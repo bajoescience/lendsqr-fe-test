@@ -113,8 +113,8 @@ const UserTable = ({users} : {users: TUserObj[] | null | undefined}) => {
             </span>)
           } 
 
-          if (number === page + 2) {
-            return <span>...</span>
+          if (number === page + 3) {
+            return <span key={number}>...</span>
           }
 
           return 
