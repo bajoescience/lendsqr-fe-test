@@ -158,11 +158,11 @@ const UserTable = ({users} : {users: TUserObj[] | null | undefined}) => {
            out of {users?.length}
         </div>
         <nav>
-          <button onClick={handlePageChange('prev')}>
+          <button className='pag-nav-butt' onClick={handlePageChange('prev')}>
             <img src={leftNavIcon} alt="left nav icon" />
           </button>
           {paginationDisplay()}
-          <button onClick={handlePageChange('next')}>
+          <button className='pag-nav-butt' onClick={handlePageChange('next')}>
             <img src={rightNavIcon} alt="right nav icon" />
           </button>
         </nav>

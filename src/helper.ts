@@ -1,4 +1,4 @@
-import { TSidebarLink, TPaginate, TUserObj } from "./types"
+import { TSidebarLink, TPaginate, TUserObj, TDisplayStat } from "./types"
 
 // These are the Sidebar imports
 import userIcon from './img/user.png'
@@ -22,6 +22,12 @@ import reportsIcon from './img/Reports.png'
 import prefrencesIcon from './img/Prefences.png'
 import feesAndPricing from './img/Fees and Pricing.png'
 import auditLogsIcon from './img/Audit Logs.png'
+
+import usersIcon from './img/USERS.png'
+import activeusersIcon from './img/ACTIVE USERS.png'
+import loanusersIcon from './img/USERS WITH LOANS.png'
+import savingusersIcon from './img/USERS WITH SAVINGS.png'
+
 
 
 
@@ -56,6 +62,26 @@ export const paginateFunc = ({page, diff, users}: {
 
   return users?.slice(start, end)
 } 
+
+// Display the user stats for the user page box
+export const displayStats :TDisplayStat[] = [{
+  name: 'USERS',
+  icon: usersIcon,
+  count: 0
+}, {
+  name: 'ACTIVE USERS',
+  count: 0,
+  icon: activeusersIcon
+}, {
+  name: 'USERS WITH LOANS',
+  count: 12453,
+  icon: loanusersIcon
+}, {
+  name: 'USERS WITH SAVINGS',
+  count: 102453,
+  icon: savingusersIcon
+}]
+
 
 // Store each section of sidebar as a type array in sidebarsection
 type TSidebarArray = {

@@ -1,11 +1,7 @@
-import usersIcon from '../img/USERS.png'
-import activeusersIcon from '../img/ACTIVE USERS.png'
-import loanusersIcon from '../img/USERS WITH LOANS.png'
-import savingusersIcon from '../img/USERS WITH SAVINGS.png'
 
 import '../styles/User.css'
 
-import { TDisplayStat, TUserObj } from '../types'
+import { TUserObj } from '../types'
 
 
 import UserBox from './UserBox'
@@ -14,26 +10,14 @@ import UserTable from './UserTable'
 import { useEffect, useState } from 'react'
 
 import {clearUsers, createUser, getUsers} from '../services/user'
+import { displayStats } from '../helper'
+
+
 
 
 const Users = () => {
-  const displayStats :TDisplayStat[] = [{
-    name: 'USERS',
-    icon: usersIcon,
-    count: 2453
-  }, {
-    name: 'ACTIVE USERS',
-    count: 2453,
-    icon: activeusersIcon
-  }, {
-    name: 'USERS WITH LOANS',
-    count: 12453,
-    icon: loanusersIcon
-  }, {
-    name: 'USERS WITH SAVINGS',
-    count: 102453,
-    icon: savingusersIcon
-  }]
+  // Keep the user stats to be displayed in the user box
+  const [stats, setStats] = useState(displayStats)
 
   const [users, setUsers] = useState<TUserObj[] | null>(null)
 
@@ -60,11 +44,34 @@ const Users = () => {
     fetchUsers()
   }, [])
 
+    // If the user array changes, the stats state changes also
+    useEffect(() => {
+      const newStats = stats.map(stat => {
+        if (stat.name === 'USERS') {
+          return ({
+            ...stat,
+            count: users?.length || 0
+          })
+        // Return the count of the active users
+        } else if (stat.name === 'ACTIVE USERS') {
+          return ({
+            ...stat,
+            count: users?.filter(user => user.status === 'Active').length || 0
+          })
+        } else {
+          return stat
+        }
+      })
+      setStats(newStats)
+      
+    }, [users])
+  
+
   return (
     <div className="main">
       <h2>Users</h2> 
       <div className="box-display">
-        {displayStats.map(stat => <UserBox key={stat.name} stat={stat} />)}
+        {stats.map(stat => <UserBox key={stat.name} stat={stat} />)}
       </div>
         <UserTable users={users} />
     </div>
