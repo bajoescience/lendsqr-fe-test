@@ -18,9 +18,10 @@
 }
 
 
+/* clamp(135px, 23.3%, 240px); */
 .box {
   height: 160px;
-  width: clamp(135px, 23.3%, 240px);
+  width: clamp(135px, 23.25%, 350px);
 
   border-radius: 4px;
 
@@ -63,7 +64,7 @@
 }
 
 .table-con table {
-  width: 977px;
+  min-width: max(972px, 94.1%);
   margin: 30px 30px;
 }
 
@@ -165,4 +166,11 @@
 
 .pag-nav-butt:active {
   opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .paginate-con {
+    flex-direction: column;
+    gap: 10px;
+  }  
 }
