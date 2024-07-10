@@ -11,7 +11,7 @@ const UserBox = ({stat} : {stat: TDisplayStat}) => {
             {stat.name}
           </div>
           <div className='box-count'>
-            {stat.count?.toString()}
+            {stat.count?.toLocaleString()}
           </div>
     </div>
   )

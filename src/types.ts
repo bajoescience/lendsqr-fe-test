@@ -33,3 +33,6 @@ export type TUserObj = {
   date: string,
   status: TStatus,
 }
+
+// Define specific values for the paginate type
+export type TPaginate = 10 | 20 | 30 | 50 | 100

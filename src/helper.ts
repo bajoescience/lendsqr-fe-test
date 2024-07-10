@@ -1,4 +1,4 @@
-import { TSidebarLink } from "./types"
+import { TSidebarLink, TPaginate, TUserObj } from "./types"
 
 // These are the Sidebar imports
 import userIcon from './img/user.png'
@@ -40,6 +40,22 @@ export const nameToUrl = (name :string) => name.toLocaleLowerCase().replaceAll('
 // These are the table headers for the users page
 export const tHeaders = ['organization', 'username', 'email', 'phone number', 'date joined', 'status'] as const
 
+// List of possible pagination values for users table
+export const paginateArray :TPaginate[] = [10, 20, 30, 50, 100]
+
+// Function that divides the users array by pagination
+export const paginateFunc = ({page, diff, users}: {
+  page: number,
+  diff: TPaginate,
+  users: TUserObj[] | null | undefined
+}) => {
+
+  // Get the start and end of the paginate string
+  const start = 0 + ((page - 1) * diff);
+  const end = diff * page;
+
+  return users?.slice(start, end)
+} 
 
 // Store each section of sidebar as a type array in sidebarsection
 type TSidebarArray = {
