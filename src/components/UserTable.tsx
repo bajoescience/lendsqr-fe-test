@@ -1,55 +1,108 @@
 import filterIcon from '../img/filter.png'
-import selectIcon from '../img/selectIcon.png'
 
-import { TUserObj, TPaginate } from '../types'
+import { TUserObj, TPaginate, tHead } from '../types'
 
 import { tHeaders, paginateArray, paginateFunc } from '../helper'
 
-import StatusButton from './StatusButton'
 import { useState, useEffect } from 'react'
+
+import UserTableRow from './UserTableRow'
 
 // Get the pagination images
 import leftNavIcon from '../img/left-nav.png'
 import rightNavIcon from '../img/right-nav.png'
+import UserFilter from './UserFilter'
 
-const UserTableRow = ({user} : {user: TUserObj}) => {
+const UserTableHeadData = (
+  {title, filterCon, setFilterCon, setFilterOpts, filterOpts} 
+  : {
+    title: tHead, 
+    filterCon: tHead | '', 
+    setFilterCon: React.Dispatch<React.SetStateAction<"" | tHead>>,
+    setFilterOpts: React.Dispatch<React.SetStateAction<TUserObj | null>>,
+    filterOpts: TUserObj | null
+  } 
+  ) => {
+
+    // Handle the filter functionality when filter img is clicked
+    const handleFilterClick = (e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+      // Check if the filter form is not  already enabled
+      if (title !== filterCon) {
+        // Enable form
+        setFilterCon(title)
+        return
+      }
+
+      // If filter form is already enabled, diasble it
+      setFilterCon('')
+      
+    }
   return (
-    <tr className='bordered'>
-      <td>{user.organization}</td>
-      <td>{user.username} </td>
-      <td>{user.email} </td>
-      <td>{user.phone} </td>
-      <td>{user.date} </td>
-      <td>
-        <StatusButton status={user.status}/>
-      </td>
-      <td className='select'>
-        <img className='pointer' src={selectIcon} alt="select" loading='lazy'/>
-      </td>
-    </tr>
+    <th colSpan={title === 'status' ? 2 : 1}>
+      <div className='con relative'>
+        {title.toUpperCase()}
+        <img onClick={handleFilterClick} className='pointer' src={filterIcon} alt="filter" loading='lazy'/>
+        {(filterCon === title) && <UserFilter 
+          setFilterCon={setFilterCon} 
+          setFilterOpts={setFilterOpts} 
+          filterOpts={filterOpts}
+        />}
+      </div>
+    </th>
   )
 }
 
+const UserTableHead = ({filterOpts, setFilterOpts}: {
+  setFilterOpts: React.Dispatch<React.SetStateAction<TUserObj | null>>,
+  filterOpts: TUserObj | null 
+}) => {
 
+  // Store the table header value that the filter component is currently anchored to
+  const [filterCon, setFilterCon] = useState<tHead | ''>('')
+  console.log(filterCon);
+  
 
+  return (
+    <thead>
+      <tr>
+        {tHeaders.map(title => <UserTableHeadData
+          key={title} 
+          title={title} 
+          filterCon={filterCon}
+          setFilterCon={setFilterCon}
+          setFilterOpts={setFilterOpts}
+          filterOpts={filterOpts}
+          />
+        )}
+      </tr>
+    </thead>
+  )
+}
 
-
+const initialFilterOpts = {
+  organization: '', 
+  username: '', 
+  email: '', 
+  date: '', 
+  phone: '', 
+  status: ''
+}
 
 const UserTable = ({users} : {users: TUserObj[] | null | undefined}) => {
+  const [filterOpts, setFilterOpts] = useState<TUserObj| null>(null)
+
   const [paginate, setPaginate] = useState<{ diff: TPaginate, page: number, pageCount?: number}>({
     diff: 10,
     page: 1,
   })
-  
-  
 
   useEffect(() => {
     if (!users) return 
     // Get the number of pages
     setPaginate({...paginate, pageCount: Math.ceil(users.length / paginate.diff)}) 
   }, [users, paginate.diff])
-  
-  // Display users the have been divided by pagination 
+
+  // Display users that have been divided by pagination
   const usersToDisplay = paginateFunc({
     page: paginate.page,
     diff: paginate.diff,
@@ -63,7 +116,7 @@ const UserTable = ({users} : {users: TUserObj[] | null | undefined}) => {
   }
 
 
-  // Handle the change in page navigation
+  // Handle the change in page navigation/number
   // nav_type can only have two values
   const handlePageChange = (nav_type :'prev' | 'next') => {
     const {page, pageCount} = paginate
@@ -127,17 +180,8 @@ const UserTable = ({users} : {users: TUserObj[] | null | undefined}) => {
     <>
       <div className='table-con'>
         <table>
-          <thead>
-            <tr>
-              {tHeaders.map(title => <th key={title} colSpan={title === 'status' ? 2 : 1}>
-                  <div className='con' >
-                    {title.toUpperCase()}
-                    <img className='pointer' src={filterIcon} alt="filter" loading='lazy'/>
-                  </div>
-                </th>
-              )}
-            </tr>
-          </thead>
+          {/* Render the head of the user */}
+          <UserTableHead filterOpts={filterOpts} setFilterOpts={setFilterOpts} />
 
           {/* Render each user as a row */}
           <tbody>
@@ -150,12 +194,14 @@ const UserTable = ({users} : {users: TUserObj[] | null | undefined}) => {
           Showing 
           <span className='select-con'>
             <select value={paginate.diff} onChange={handlePaginateSelect}>
-              {paginateArray.map(opt => (
+              {!users 
+              ? <option value={0}>0</option>
+              :paginateArray.map(opt => (
                 <option key={opt} value={opt}>{opt}</option>
               ))}
             </select>  
           </span> 
-           out of {users?.length}
+           out of {!users ? 0 : users.length}
         </div>
         <nav>
           <button className='pag-nav-butt' onClick={handlePageChange('prev')}>

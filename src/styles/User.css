@@ -23,7 +23,9 @@
   height: 160px;
   width: clamp(135px, 23.25%, 350px);
 
-  border-radius: 4px;
+  box-shadow: var(--STANDARD-BOX-SHADOW);
+  border-radius: var(--STANDARD-BORDER-RADIUS);
+  border: 1px solid rgba(33, 63, 125, 0.06);
 
   padding: 30px 2.91%;
   padding-top: 20px;
@@ -61,6 +63,10 @@
   overflow-y: auto;
   background-color: white;
   color: var(--LIGHT);
+
+  box-shadow: var(--STANDARD-BOX-SHADOW);
+  border-radius: var(--STANDARD-BORDER-RADIUS);
+  border: 1px solid rgba(33, 63, 125, 0.06);
 }
 
 .table-con table {
@@ -173,4 +179,107 @@
     flex-direction: column;
     gap: 10px;
   }  
+}
+
+
+
+/* Styles for the filer form */
+.user-filter-form-con {
+  width: 270px;
+  min-height: 600px;
+  background-color: white;
+
+  color: var(--LIGHT);
+  font-weight: 500;
+  font-size: 0.875rem;
+
+  border: 1px solid rgba(84, 95, 125, 0.14);
+  border-radius: var(--STANDARD-BORDER-RADIUS);
+
+  box-shadow: var(--STANDARD-BOX-SHADOW);
+
+  padding: 10px 20px;
+
+  position: absolute;
+  top: 30px;
+  left: -15px;
+  z-index: 50;
+}
+
+.user-filter-form-con .form-inpt {
+  margin: 1.25rem 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5rem;
+}
+
+.user-filter-form-con select, .user-filter-form-con input {
+  padding: 0.75rem 1rem;
+  outline: none;
+
+  border: 1px solid rgba(84, 95, 125, 0.3);
+  border-radius: 0.5rem;
+
+  background-color: white;
+}
+
+.user-filter-form-con .form-butt {
+  display: flex;
+  gap: 1rem;
+  margin: 1.25rem 0;
+  padding-top: 0.625rem;
+}
+
+.user-filter-form-con button {
+  padding: 0.75rem 1.875rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.user-filter-form-con button.reset {
+  border: 1px solid var(--LIGHT);
+  font-weight: 600;
+  font-size: 0.875rem;
+
+  color: var(--LIGHT);
+  background-color: white;
+}
+
+.user-filter-form-con button.submit {
+  border: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: white;
+  background-color: var(--SEC-COLOR);
+}
+
+.user-filter-form-con button.reset:active {
+  opacity: 0.7;
+}
+
+.status-change-con {
+  padding-right: 20px;
+  background-color: wheat;
+
+
+
+  border-radius: var(--STANDARD-BORDER-RADIUS);
+  border: 1px solid rgba(84, 95, 125, 0.04);
+  box-shadow:  var(--STANDARD-BOX-SHADOW);
+
+  position: absolute;
+}
+
+.status-change-con div {
+  display: flex;
+  gap: 0.5rem;
+
+  margin: 20px;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--LIGHT);
+  cursor: pointer;
 }

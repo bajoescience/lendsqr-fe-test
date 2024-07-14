@@ -11,6 +11,8 @@ import { useEffect, useState } from 'react'
 
 import {clearUsers, createUser, getUsers} from '../services/user'
 import { displayStats } from '../helper'
+import UserFilter from './UserFilter'
+import StatusChange from './StatusChange'
 
 
 
@@ -34,8 +36,12 @@ const Users = () => {
   // Fetch the available users from the database
   useEffect(() => {
     const fetchUsers = async () => {
-      const fetchedUsers = await getUsers() as TUserObj[]
-      setUsers(fetchedUsers)
+      try {
+        const fetchedUsers = await getUsers() as TUserObj[]
+        setUsers(fetchedUsers)
+      } catch (error) {
+       setUsers(null) 
+      }
       // for(let a = 0; a < 500 ; a++) {
       //   await createUser(newusers[0])
       // }
@@ -74,6 +80,7 @@ const Users = () => {
         {stats.map(stat => <UserBox key={stat.name} stat={stat} />)}
       </div>
         <UserTable users={users} />
+        <StatusChange />
     </div>
   )
 }

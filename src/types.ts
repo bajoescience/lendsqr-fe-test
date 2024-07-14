@@ -22,7 +22,7 @@ export type TDisplayStat = {
   count: number | null
 }
 
-export type TStatus = 'Active' | 'Inactive' | 'Pending' | 'Blacklisted'
+export type TStatus = 'Active' | 'Inactive' | 'Pending' | 'Blacklisted'| ''
 
 export type TUserObj = {
   id?: string,
@@ -36,3 +36,6 @@ export type TUserObj = {
 
 // Define specific values for the paginate type
 export type TPaginate = 10 | 20 | 30 | 50 | 100
+
+// This is the list of headers
+export type tHead = "status" | "organization" | "username" | "email" | "phone number" | "date joined"

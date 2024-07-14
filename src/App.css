@@ -26,6 +26,8 @@
   /* Define the limits for the app width and height */
   --MIN-APP-WIDTH: 481px;
   --MIN-APP-HEIGHT: 100vh;
+  --STANDARD-BOX-SHADOW: 3 5 20 rgba(0, 0, 0, 0.04);
+  --STANDARD-BORDER-RADIUS: 0.25rem;
 }
 
 .root {
@@ -36,9 +38,6 @@
   padding-top: calc(var(--HEADER-HEIGHT) + 60px);
   padding-left: 24.17%;
   padding-right: var(--NON-SIDEBAR-PAGE-PADDING);
-
-  background-color: rgba(79, 114, 184, 0.06);
-
   min-height: 100vh;
   width: 100%;
 }
@@ -63,3 +62,6 @@
   cursor: pointer;
 }
 
+.relative {
+  position: relative;
+}
