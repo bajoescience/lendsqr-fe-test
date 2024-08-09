@@ -20,14 +20,20 @@ import UserFilter from './UserFilter'
 const UserTable = ({users} : {users: TUserObj[] | null}) => {
 
   // This object is the schema by which users are filtered
-  const [filterOpts, setFilterOpts] = useState<TUserObj>({
+  const [filterSchema, setFilterSchema] = useState<TUserObj>({
     organization: '',
     username: '',
     email: '',
     phone: '',
     date: '',
-    status: 'Active' || 'Blacklisted' || 'Inactive' || 'Pending' ,
+    status: '' ,
+    id: ''
   })
+  console.log(filterSchema);
+  
+
+  // This is the list of users filtered according to the filterSchema
+  const [filteredUsers, setFilteredUsers] = useState<TUserObj[] | null>(null)
 
   // diff: How many users is displayed per page.
   // page: This is the page number for the users display.
@@ -37,35 +43,25 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
     page: 1,
   })
 
-  const [filteredUsers, setFilteredUsers] = useState<TUserObj[] | null>(null)
 
 
   // Create a function that takes the users to be displayed
-  // And the filter values submitted by the filter form
-  // And matches them
+  // and filters them using the schema 
+  // submitted by the filter form
   const filterUsers = (users: TUserObj[] | null) :TUserObj[] | null => {
     
     const filteredUsers = users?.filter(user => {
-      // let bool = true
-      // Object.keys(user).forEach((key) => {
-      //   console.log(user[key]);
+      let bool = true
+      
+      Object.keys(user).forEach((key) => {
+        const userProperty = user[key as keyof TUserObj]
+        const match = filterSchema[key as keyof TUserObj] as string
         
-      //   // if (user[key].includes(filterOpts[key])) {
-      //   //   return true
-      //   // }
-      // })
-      if (
-        user['organization'].includes(filterOpts['organization']) && 
-        user['date'].includes(filterOpts['date']) && 
-        user['phone'].includes(filterOpts['phone']) && 
-        user['email'].includes(filterOpts['email']) && 
-        user['username'].includes(filterOpts['username']) && 
-        user['status'].includes(filterOpts['status'])
-      ) {
-        return true
-      }   else {
-        return false
-      }   
+        if (!userProperty?.includes(match)) {
+          bool = false
+        }
+      })
+      return bool  
     })
 
     if (!filteredUsers || filteredUsers.length === 0) {
@@ -171,13 +167,15 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
       <div className='table-con'>
         <table>
           {/* Render the head of the user */}
-          <UserTableHead filterOpts={filterOpts} setFilterOpts={setFilterOpts} />
+          <UserTableHead />
 
           {/* Render each user as a row */}
           <UserTableBody users={filterUsers(usersToDisplay)} />
         </table>
       </div>
-      <UserFilter  />
+      <UserFilter
+        filterSchema={filterSchema}
+        setFilterSchema={setFilterSchema}  />
       <div className='paginate-con'>
         <div>
           Showing 

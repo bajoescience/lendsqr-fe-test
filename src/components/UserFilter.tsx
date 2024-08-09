@@ -2,35 +2,34 @@ import { useEffect } from "react"
 import { tHead, TStatus, TUserObj } from "../types"
 
 type TUserFilter = {
-  setFilterCon?: React.Dispatch<React.SetStateAction<"" | tHead>>,
-  setFilterOpts?: React.Dispatch<React.SetStateAction<TUserObj>>,
-  filterOpts?: TUserObj
+  setFilterSchema: React.Dispatch<React.SetStateAction<TUserObj>>,
+  filterSchema: TUserObj
 }
 
-const UserFilter = ({setFilterCon, setFilterOpts, filterOpts} :TUserFilter) => {
+const UserFilter = ({ setFilterSchema, filterSchema} :TUserFilter) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
-    const organization = data.get('organization') as string
-    const username = data.get('username') as string
-    const email = data.get('email') as string
-    const date = data.get('date') as string
-    const phone = data.get('phone') as string
-    const status = data.get('status') as TStatus
-    const filterOpts :TUserObj = {
+    const organization = data.get('organization') as string || ''
+    const username = data.get('username') as string || ''
+    const email = data.get('email') as string || ''
+    const date = data.get('date') as string || ''
+    const phone = data.get('phone') as string || ''
+    const status = data.get('status') as TStatus || ''
+
+    const filterSchema :TUserObj = {
       organization, 
       username, 
       email, 
       date, 
       phone, 
-      status
+      status,
+      id: ''
     }
     
-    // // Sets the filter schema to the filter schema given by the form
-    // setFilterOpts(filterOpts)
-
-    // // Removes the title bar the form is anchored to <Makes the form Dissapear>
-    // setFilterCon('')
+    
+    // Sets the filter schema to the filter schema given by the form
+    setFilterSchema(filterSchema)
   }
 
   const stylePositioning = {

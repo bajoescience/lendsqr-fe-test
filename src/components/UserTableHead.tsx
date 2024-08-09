@@ -1,19 +1,16 @@
 import { useState } from "react"
-import { tHead, TUserObj } from "../types"
-import UserFilter from "./UserFilter"
+import { tHead } from "../types"
 import { tHeaders } from "../helper"
 
 import filterIcon from '../img/filter.png'
 
 
 const UserTableHeadData = (
-  {title, filterCon, setFilterCon, setFilterOpts, filterOpts} 
+  {title, filterCon, setFilterCon} 
   : {
     title: tHead, 
     filterCon: tHead | '', 
     setFilterCon: React.Dispatch<React.SetStateAction<"" | tHead>>,
-    setFilterOpts: React.Dispatch<React.SetStateAction<TUserObj>>,
-    filterOpts: TUserObj
   } 
   ) => {
 
@@ -35,9 +32,8 @@ const UserTableHeadData = (
         // Enable form     
         // Here we assign the postion of the mouse
         // to the position of the filter form which is an absolute element
-        userFilter.style.top = `${(posY + 10).toString()}px`
-        userFilter.style.left = `${(posX - 140).toString()}px`
-        console.log({top: userFilter.style.top, left: userFilter.style.left});
+        userFilter.style.top = `${(posY + 20).toString()}px`
+        userFilter.style.left = `${(posX - 130).toString()}px`
 
         // Indicate that the form is currently anchored to this title
         setFilterCon(title)
@@ -61,11 +57,8 @@ const UserTableHeadData = (
   )
 }
 
-// TODO: Implement filter functionality to filter the users array using the form
-const UserTableHead = ({filterOpts, setFilterOpts}: {
-  setFilterOpts: React.Dispatch<React.SetStateAction<TUserObj>>,
-  filterOpts: TUserObj
-}) => {
+// Implement filter functionality to filter the users array using the form
+const UserTableHead = () => {
 
   // Store the name of the table header that the filter component is currently anchored to.
   const [filterCon, setFilterCon] = useState<tHead | ''>('')
@@ -79,8 +72,6 @@ const UserTableHead = ({filterOpts, setFilterOpts}: {
           title={title} 
           filterCon={filterCon}
           setFilterCon={setFilterCon}
-          setFilterOpts={setFilterOpts}
-          filterOpts={filterOpts}
           />
         )}
       </tr>
