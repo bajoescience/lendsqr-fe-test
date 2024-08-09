@@ -19,7 +19,7 @@ const StatusChange = () => {
   return (
   <div className='status-change-con'>
     {viewArr.map(view => (
-      <div>
+      <div key={view.title}>
         <img src={view.src} alt={view.title} />
         <span>{view.title}</span>
       </div>

@@ -96,8 +96,9 @@
   font-size: 0.875rem;
 }
 
-.table-con tbody .select{
+.table-con tbody .select-button-con {
   padding-left: 30px;
+  position: relative;
 }
 
 .status-button {
@@ -201,8 +202,9 @@
   padding: 10px 20px;
 
   position: absolute;
-  top: 30px;
-  left: -15px;
+  /* top: 30px;
+  left: -15px; */
+  left: 3px;
   z-index: 50;
 }
 
@@ -261,15 +263,14 @@
 
 .status-change-con {
   padding-right: 20px;
-  background-color: wheat;
-
-
+  background-color: white;
 
   border-radius: var(--STANDARD-BORDER-RADIUS);
   border: 1px solid rgba(84, 95, 125, 0.04);
   box-shadow:  var(--STANDARD-BOX-SHADOW);
 
   position: absolute;
+  z-index: 80;
 }
 
 .status-change-con div {

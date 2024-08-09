@@ -19,7 +19,7 @@ export type TSidebarLink = {
 export type TDisplayStat = {
   icon: string,
   name: string,
-  count: number | null
+  count: number
 }
 
 export type TStatus = 'Active' | 'Inactive' | 'Pending' | 'Blacklisted'| ''

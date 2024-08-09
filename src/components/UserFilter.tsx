@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import { tHead, TStatus, TUserObj } from "../types"
 
-const UserFilter = ({setFilterCon, setFilterOpts, filterOpts} : {
-  setFilterCon: React.Dispatch<React.SetStateAction<"" | tHead>>,
-  setFilterOpts: React.Dispatch<React.SetStateAction<TUserObj | null>>,
-  filterOpts: TUserObj | null
+type TUserFilter = {
+  setFilterCon?: React.Dispatch<React.SetStateAction<"" | tHead>>,
+  setFilterOpts?: React.Dispatch<React.SetStateAction<TUserObj>>,
+  filterOpts?: TUserObj
 }
-) => {
+
+const UserFilter = ({setFilterCon, setFilterOpts, filterOpts} :TUserFilter) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = new FormData(e.currentTarget)
@@ -25,13 +26,19 @@ const UserFilter = ({setFilterCon, setFilterOpts, filterOpts} : {
       status
     }
     
-    
-    // setUsers(users?.filter(user => ))
-    setFilterCon('')
+    // // Sets the filter schema to the filter schema given by the form
+    // setFilterOpts(filterOpts)
+
+    // // Removes the title bar the form is anchored to <Makes the form Dissapear>
+    // setFilterCon('')
+  }
+
+  const stylePositioning = {
+    left: '-3000px',
   }
   
   return (
-    <div className="user-filter-form-con">
+    <div className="user-filter-form-con" id="filter" style={stylePositioning}>
       <form onSubmit={handleSubmit} noValidate>
         <div className="form-inpt">
           <label htmlFor="organization">Organization</label>

@@ -57,15 +57,17 @@ export const paginateArray :TPaginate[] = [10, 20, 30, 50, 100]
 export const paginateFunc = ({page, diff, users}: {
   page: number,
   diff: TPaginate,
-  users: TUserObj[] | null | undefined
-}) => {
+  users: TUserObj[] | null
+}) :TUserObj[] | null => {
 
-  
   // Get the start and end of the paginate string
   const start = 0 + ((page - 1) * diff);
   const end = diff * page;
-
-  return users?.slice(start, end)
+  const userSlice = users?.slice(start, end)
+  if (!userSlice) {
+    return null
+  }
+  return userSlice
 } 
 
 // Display the user stats for the user page box
