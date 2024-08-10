@@ -1,5 +1,7 @@
-import { useEffect } from "react"
-import { tHead, TStatus, TUserObj } from "../types"
+import { TStatus, TUserObj } from "../types"
+import { stylePositioning } from "../helper"
+
+import '../styles/Filter.css'
 
 type TUserFilter = {
   setFilterSchema: React.Dispatch<React.SetStateAction<TUserObj>>,
@@ -32,9 +34,6 @@ const UserFilter = ({ setFilterSchema, filterSchema} :TUserFilter) => {
     setFilterSchema(filterSchema)
   }
 
-  const stylePositioning = {
-    left: '-3000px',
-  }
   
   return (
     <div className="user-filter-form-con" id="filter" style={stylePositioning}>

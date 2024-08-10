@@ -28,7 +28,37 @@ import activeusersIcon from './img/ACTIVE USERS.png'
 import loanusersIcon from './img/USERS WITH LOANS.png'
 import savingusersIcon from './img/USERS WITH SAVINGS.png'
 
+// Make an element disappear
+export const stylePositioning = {
+  left: '-3000px',
+}
 
+
+  // Create a function that takes the users to be displayed
+  // and filters them using the schema 
+  // submitted by the filter form
+export  const filterUsers = (users: TUserObj[] | null, filterSchema: TUserObj) :TUserObj[] | null => {
+    
+    const filteredUsers = users?.filter(user => {
+      let bool = true
+      
+      Object.keys(user).forEach((key) => {
+        const userProperty = user[key as keyof TUserObj]
+        const match = filterSchema[key as keyof TUserObj] as string
+        
+        if (!userProperty?.includes(match)) {
+          bool = false
+        }
+      })
+      return bool  
+    })
+
+    if (!filteredUsers || filteredUsers.length === 0) {
+      return null
+    }
+    
+    return filteredUsers
+  }
 
 
 export const validateEmail = (email: string):boolean => {

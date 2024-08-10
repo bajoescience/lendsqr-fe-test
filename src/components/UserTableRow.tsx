@@ -20,12 +20,36 @@ const UserTableRow = ({
     const id = user.id
     if (!id) return
 
+    // First, we fetch the mouse position
+      // As that is where we the filter icon is
+      // And that is where we will anchor the form
+      const posX = e.pageX;
+      const posY = e.pageY;
+
+    // Here we gain access to the filter form
+    const statusCard = document.getElementById('statusCard') as HTMLElement
+    console.log(posX, posY, statusCard);
+    
+
     // If the status change button has already been on
     // Switch it off
     if (statusOwner !== id) {
+      // Enable form     
+      // Here we assign the postion of the mouse
+      // to the position of the filter form which is an absolute element
+      statusCard.style.top = `${(posY + 5).toString()}px`
+      statusCard.style.left = `${(posX - 110).toString()}px`
+
+      // Indicate that this user id is the
+      // row that the statusChange card
+      // currently anchored to
       setStatusOwner(id)
       return
     } else {
+
+      // Hide the form
+      statusCard.style.left = '-3000px'
+
       setStatusOwner('')
     }
   }
@@ -44,7 +68,6 @@ const UserTableRow = ({
       <td>
         <div className='select-button-con'>
           <img onClick={handleSelectToggle} className='pointer' src={selectIcon} alt="select" loading='lazy'/>
-          {(statusOwner === user.id) && <StatusChange />}
         </div>
       </td>
     </tr>

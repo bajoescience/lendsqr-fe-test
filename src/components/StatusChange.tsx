@@ -1,7 +1,7 @@
-import { title } from 'process'
 import viewIcon from '../img/viewDetails.png'
 import friendIcon from '../img/delete-friend.png'
 import activateIcon from '../img/active-user.png'
+import { stylePositioning } from '../helper'
 
 // Content of the component to be rendered
 const viewArr = [{
@@ -17,7 +17,7 @@ const viewArr = [{
 
 const StatusChange = () => {
   return (
-  <div className='status-change-con'>
+  <div className='status-change-con' id='statusCard' style={stylePositioning}>
     {viewArr.map(view => (
       <div key={view.title}>
         <img src={view.src} alt={view.title} />

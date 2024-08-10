@@ -1,7 +1,7 @@
 
 import { TUserObj, TPaginate } from '../types'
 
-import { paginateArray, paginateFunc } from '../helper'
+import { paginateArray, paginateFunc, filterUsers } from '../helper'
 
 import { useState, useEffect } from 'react'
 
@@ -13,6 +13,7 @@ import rightNavIcon from '../img/right-nav.png'
 import UserTableHead from './UserTableHead'
 import UserTableBody from './UserTableBody'
 import UserFilter from './UserFilter'
+import StatusChange from './StatusChange'
 
 
 
@@ -29,8 +30,6 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
     status: '' ,
     id: ''
   })
-  console.log(filterSchema);
-  
 
   // This is the list of users filtered according to the filterSchema
   const [filteredUsers, setFilteredUsers] = useState<TUserObj[] | null>(null)
@@ -45,34 +44,9 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
 
 
 
-  // Create a function that takes the users to be displayed
-  // and filters them using the schema 
-  // submitted by the filter form
-  const filterUsers = (users: TUserObj[] | null) :TUserObj[] | null => {
-    
-    const filteredUsers = users?.filter(user => {
-      let bool = true
-      
-      Object.keys(user).forEach((key) => {
-        const userProperty = user[key as keyof TUserObj]
-        const match = filterSchema[key as keyof TUserObj] as string
-        
-        if (!userProperty?.includes(match)) {
-          bool = false
-        }
-      })
-      return bool  
-    })
-
-    if (!filteredUsers || filteredUsers.length === 0) {
-      return null
-    }
-    
-    return filteredUsers
-  }
 
   useEffect(() => {
-    setFilteredUsers(filterUsers(users))
+    setFilteredUsers(filterUsers(users, filterSchema))
   }, [users])
 
   useEffect(() => {
@@ -170,12 +144,12 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
           <UserTableHead />
 
           {/* Render each user as a row */}
-          <UserTableBody users={filterUsers(usersToDisplay)} />
+          <UserTableBody users={filterUsers(usersToDisplay, filterSchema)} />
         </table>
       </div>
-      <UserFilter
-        filterSchema={filterSchema}
-        setFilterSchema={setFilterSchema}  />
+
+      {/* Filter form that is toggled */}
+      <UserFilter filterSchema={filterSchema} setFilterSchema={setFilterSchema}  />
       <div className='paginate-con'>
         <div>
           Showing 
@@ -200,6 +174,9 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
           </button>
         </nav>
       </div>
+
+      {/* This is the status Change card */}
+      <StatusChange />
     </>
   )
 }
