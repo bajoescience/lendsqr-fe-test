@@ -2,16 +2,15 @@ import StatusButton from './StatusButton'
 import selectIcon from '../img/selectIcon.png'
 
 import { TUserObj } from '../types'
-import StatusChange from './StatusChange'
 
 const UserTableRow = ({
   user,
   statusOwner,
-  setStatusOwner
+  setanchor_id
 } : {
   user: TUserObj,
-  statusOwner: string,
-  setStatusOwner: React.Dispatch<React.SetStateAction<string>>,
+  statusOwner: string | null,
+  setanchor_id: React.Dispatch<React.SetStateAction<string | null>>
 }) => {
 
   const handleSelectToggle = (
@@ -28,7 +27,6 @@ const UserTableRow = ({
 
     // Here we gain access to the filter form
     const statusCard = document.getElementById('statusCard') as HTMLElement
-    console.log(posX, posY, statusCard);
     
 
     // If the status change button has already been on
@@ -37,22 +35,29 @@ const UserTableRow = ({
       // Enable form     
       // Here we assign the postion of the mouse
       // to the position of the filter form which is an absolute element
-      statusCard.style.top = `${(posY + 5).toString()}px`
+      statusCard.style.top = `${(posY + 7).toString()}px`
       statusCard.style.left = `${(posX - 110).toString()}px`
+      
 
       // Indicate that this user id is the
       // row that the statusChange card
       // currently anchored to
-      setStatusOwner(id)
+      setanchor_id(id)
       return
     } else {
 
+      // Removethe user-id from the refrence so the
+      // status change component can know that there is no anchor.
+      setanchor_id(null)
+
       // Hide the form
       statusCard.style.left = '-3000px'
-
-      setStatusOwner('')
     }
   }
+
+  
+  
+  
 
   return (
     <tr className='bordered'>

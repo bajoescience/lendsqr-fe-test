@@ -5,20 +5,23 @@ import { TUserObj } from "../types"
 import UserTableRow from "./UserTableRow"
 
 // Here we can implement the functionality for status change
-const UserTableBody = ({users} : {
-  users: TUserObj[] | null
+const UserTableBody = ({
+  users,
+  anchor_id,
+  setanchor_id
+} : {
+  anchor_id: string | null,
+  users: TUserObj[] | null,
+  setanchor_id: React.Dispatch<React.SetStateAction<string | null>>
 }) => {
-
-  // Store the id of the user that the status change component is currently anchored to
-  const [statusOwner, setStatusOwner] = useState('')
 
   return (
     <tbody>
       {users?.map((user, i) => <UserTableRow 
         key={i} 
         user={user} 
-        statusOwner={statusOwner}
-        setStatusOwner={setStatusOwner}
+        statusOwner={anchor_id}
+        setanchor_id={setanchor_id}
       />)}
     </tbody>
   )

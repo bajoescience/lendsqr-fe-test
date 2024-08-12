@@ -5,8 +5,6 @@ import { paginateArray, paginateFunc, filterUsers } from '../helper'
 
 import { useState, useEffect } from 'react'
 
-import UserTableRow from './UserTableRow'
-
 // Get the pagination images
 import leftNavIcon from '../img/left-nav.png'
 import rightNavIcon from '../img/right-nav.png'
@@ -18,7 +16,13 @@ import StatusChange from './StatusChange'
 
 
 
-const UserTable = ({users} : {users: TUserObj[] | null}) => {
+const UserTable = ({
+  users,
+  setUsers
+} : {
+  users: TUserObj[] | null,
+  setUsers: React.Dispatch<React.SetStateAction<TUserObj[] | null>>
+}) => {
 
   // This object is the schema by which users are filtered
   const [filterSchema, setFilterSchema] = useState<TUserObj>({
@@ -42,12 +46,14 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
     page: 1,
   })
 
-
-
+  // Store the user-id that the status change component is anchored to
+  const [anchor_id, setanchor_id]= useState<string | null>(null)
+  
+  
 
   useEffect(() => {
     setFilteredUsers(filterUsers(users, filterSchema))
-  }, [users])
+  }, [users, filterSchema])
 
   useEffect(() => {
     // filter the users
@@ -57,14 +63,19 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
     setPaginate({...paginate, pageCount: Math.ceil(filteredUsers.length / paginate.diff)}) 
   }, [filteredUsers, paginate.diff])
 
+  // Change the users array to add updated user
+  const updateChangedUser = (changedUser: TUserObj):null | undefined=> {
+    if (!users) return
+    
+    setUsers(() => users.map(user => user.id !== changedUser.id ? user: changedUser))
+  }
+
   // Display users that have been divided by pagination
   const usersToDisplay = paginateFunc({
     page: paginate.page,
     diff: paginate.diff,
     users: filteredUsers
   })
-
-
 
   // When the select option changes
   // We set the page number back to 1
@@ -134,8 +145,6 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
     )
   }
 
-  // Handle when a filter icon in the table head is clicked
-
   return (
     <>
       <div className='table-con'>
@@ -144,7 +153,7 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
           <UserTableHead />
 
           {/* Render each user as a row */}
-          <UserTableBody users={filterUsers(usersToDisplay, filterSchema)} />
+          <UserTableBody anchor_id={anchor_id} setanchor_id={setanchor_id} users={filterUsers(usersToDisplay, filterSchema)} />
         </table>
       </div>
 
@@ -176,7 +185,10 @@ const UserTable = ({users} : {users: TUserObj[] | null}) => {
       </div>
 
       {/* This is the status Change card */}
-      <StatusChange />
+      <StatusChange 
+      user={anchor_id} 
+      setanchor_id={setanchor_id} 
+      updateChangedUser={updateChangedUser} />
     </>
   )
 }

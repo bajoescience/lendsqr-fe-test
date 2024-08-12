@@ -42,13 +42,14 @@ const Users = () => {
       // }
     }
     fetchUsers()
-  }, [])
+  }, [users])
+
 
   return (
     <div className="main">
       <h2>Users</h2> 
       <UserHead users={users}/>
-      <UserTable users={users} />
+      <UserTable users={users} setUsers={setUsers} />
     </div>
   )
 }
