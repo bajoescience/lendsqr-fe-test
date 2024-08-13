@@ -12,6 +12,9 @@ import {
 import Auth from './routes/Auth';
 import Dashboard from './routes/Dashboard';
 import Main from './routes/Main';
+import UserDetails from './routes/UserDetails';
+
+import {getUser} from './services/user'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -28,6 +31,14 @@ const routeTree : RouteObject[] = [{
     path: 'dashboard',
     element: <Dashboard />,
     children: [{
+      path: 'userdetails/:userID',
+      element: <UserDetails />,
+      loader: async ({params}) => {
+        const userId = params.userID
+        if (!userId) return
+        return await getUser(userId)
+      }
+    }, {
       path: ':link',
       element: <Main />
     }, {

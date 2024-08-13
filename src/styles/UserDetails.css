@@ -1,0 +1,35 @@
+.user-details {
+  width: 100%;
+  font-family: var(--SEC-FONT-FAMILY);
+}
+
+.user-details .sect-1 button {
+  cursor: pointer;
+
+  border: none;
+  background-color: inherit;
+}
+
+.user-details .sect-1 .button-con {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  font-size: 1rem;
+  color: var(--LIGHT);
+}
+
+.sect-2 {
+  margin: 1rem 0;
+  color: var(--MAIN_COLOR);
+
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sect-2 h2 {
+  font-weight: 500;
+}
