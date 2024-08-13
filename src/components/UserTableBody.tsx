@@ -1,6 +1,4 @@
 // TODO: Create a new component for the table body
-
-import { useState } from "react"
 import { TUserObj } from "../types"
 import UserTableRow from "./UserTableRow"
 

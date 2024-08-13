@@ -22,6 +22,7 @@
   z-index: 50;
 }
 
+
 .user-filter-form-con .form-inpt {
   margin: 1.25rem 0;
 
@@ -31,14 +32,31 @@
   gap: 0.5rem;
 }
 
+
 .user-filter-form-con select, .user-filter-form-con input {
   padding: 0.75rem 1rem;
   outline: none;
+
+  color: var(--LIGHT);
+  font-family: var(--SEC-FONT-FAMILY);
 
   border: 1px solid rgba(84, 95, 125, 0.3);
   border-radius: 0.5rem;
 
   background-color: white;
+}
+
+.form-inpt  select {
+  font-size: 0.875rem;
+
+  color: var(--LIGHT);
+  font-family: var(--SEC-FONT-FAMILY);
+  padding: 0.75rem 0.7rem;
+
+}
+
+.form-inpt  option {
+  font-size: 0.875rem;
 }
 
 .user-filter-form-con .form-butt {

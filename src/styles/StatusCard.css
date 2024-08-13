@@ -1,0 +1,39 @@
+
+/* This is the status card styles */
+.status-change-con {
+  background-color: white;
+
+  width: 180px;
+
+  border-radius: var(--STANDARD-BORDER-RADIUS);
+  border: 1px solid rgba(84, 95, 125, 0.04);
+  box-shadow:  var(--STANDARD-BOX-SHADOW);
+
+  position: absolute;
+  z-index: 80;
+}
+
+.status-change-con div {
+  display: flex;
+  gap: 0.5rem;
+
+  padding: 10px 40px 10px 20px;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  color: var(--LIGHT);
+  cursor: pointer;
+}
+
+.status-change-con div:first-child {
+  padding-top: 20px;
+}
+
+.status-change-con div:last-child {
+  padding-bottom: 20px;
+}
+
+.status-change-con div:hover {
+  background-color: rgba(33, 63, 125, 0.06);
+}

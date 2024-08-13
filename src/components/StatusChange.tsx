@@ -7,6 +7,9 @@ import {getUser, updateUser} from '../services/user'
 import { TStatus, TUserObj } from '../types'
 import { useEffect } from 'react'
 
+import '../styles/StatusCard.css'
+import { useNavigate } from 'react-router-dom'
+
 // Content of the component to be rendered
 const viewArr = [{
   src: viewIcon,
@@ -29,6 +32,8 @@ const StatusChange = ({
   updateChangedUser: (changedUser: TUserObj) => null | undefined
 }) => {
 
+  const navigate = useNavigate()
+
   // Hide the status card when not in use
   useEffect(() => {
     if (!user) {
@@ -40,8 +45,15 @@ const StatusChange = ({
   const handleViewDetails = () => {
     // TODO: Go to the next page
     return (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      console.log("view details", e);
+      if (!user) return
+
+      navigate(`/dashboard/userdetails/${user}`)
+
+      // Close the card
+      setanchor_id(null)
     }
+
+   
   }
 
   const handleUserChange = (status: TStatus) => {
@@ -60,6 +72,7 @@ const StatusChange = ({
       // save the updated user
       updateChangedUser(userObj)
 
+      // Close the card
       setanchor_id(null)
       
     }
