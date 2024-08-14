@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 import LgButton from "../components/LgButton";
-import { Ttier, TUserComplete, TUserObj } from "../types";
+import { Ttier, TUserComplete } from "../types";
 
 import backArr from "../img/back arrow.png";
 import userAvatar from "../img/user-avatar.png";
