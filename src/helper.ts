@@ -34,6 +34,7 @@ import activeusersIcon from "./img/ACTIVE USERS.png";
 import loanusersIcon from "./img/USERS WITH LOANS.png";
 import savingusersIcon from "./img/USERS WITH SAVINGS.png";
 import { getUser, updateUser } from "./services/user";
+import { JsxElement } from "typescript";
 
 // Make an element disappear
 export const stylePositioning = {

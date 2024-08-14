@@ -1,6 +1,7 @@
 .user-details {
   width: 100%;
   font-family: var(--SEC-FONT-FAMILY);
+  color: var(--MAIN_COLOR);
 }
 
 .user-details .sect-1 button {
@@ -19,9 +20,9 @@
   color: var(--LIGHT);
 }
 
+/* Section 2 */
 .sect-2 {
   margin: 1rem 0;
-  color: var(--MAIN_COLOR);
 
   width: 100%;
 
@@ -30,6 +31,49 @@
   align-items: center;
 }
 
-.sect-2 h2 {
-  font-weight: 500;
+.sect-2 h1 {
+  font-size: 1.5rem;
+}
+
+.sect-3 {
+  background-color: white;
+  margin-top: 2.875rem;
+
+  border-radius: var(--STANDARD-BORDER-RADIUS);
+  border: 1px solid rgba(33, 63, 125, 0.06);
+}
+
+.sect-3 .user-con {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  padding: 2em;
+}
+
+.sect-3 .fig-1 {
+  height: 100px;
+  width: 100px;
+  background-color: rgba(33, 63, 125, 0.16);
+
+  display: grid;
+  place-content: center;
+
+  border-radius: 50%;
+}
+
+.sect-3 .user-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sect-3 .user-display h2 {
+  font-size: 1.375rem;
+  line-height: 26px;
+}
+
+.sect-3 .user-display p {
+  color: var(--LIGHT);
+  font-size: 0.875rem;
 }
