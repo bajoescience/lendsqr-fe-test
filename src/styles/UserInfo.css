@@ -1,0 +1,42 @@
+.info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  padding-bottom: 30px;
+}
+
+.info-box:last-child {
+  padding-bottom: 0;
+}
+
+.info-box h4 {
+  font-weight: 600;
+}
+
+.info-group-con {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr 0.87fr);
+  row-gap: 30px;
+  justify-content: space-between;
+}
+
+.info-group {
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-group .key {
+  color: var(--LIGHT);
+  font-size: 0.75rem;
+}
+
+.info-group .value {
+  font-weight: 500;
+}
+
+.info-box hr {
+  opacity: 30%;
+}

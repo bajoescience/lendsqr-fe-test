@@ -35,20 +35,32 @@
   font-size: 1.5rem;
 }
 
+.sect-2 .button-con {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+}
+
 .sect-3 {
   background-color: white;
   margin-top: 2.875rem;
+  min-width: fit-content;
 
   border-radius: var(--STANDARD-BORDER-RADIUS);
   border: 1px solid rgba(33, 63, 125, 0.06);
+
+  padding: 2em 2.9%;
+  padding-bottom: 0.7em;
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
 }
 
 .sect-3 .user-con {
   display: flex;
-  gap: 20px;
+  gap: 2%;
   align-items: center;
-
-  padding: 2em;
 }
 
 .sect-3 .fig-1 {
@@ -60,6 +72,7 @@
   place-content: center;
 
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .sect-3 .user-display {
@@ -73,7 +86,72 @@
   line-height: 26px;
 }
 
-.sect-3 .user-display p {
+.sect-3 .user-display .tier {
   color: var(--LIGHT);
   font-size: 0.875rem;
+}
+
+.sect-3 nav {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.sect-3 .link {
+  color: black;
+  width: 17%;
+  min-width: 75px;
+
+  text-align: center;
+  cursor: pointer;
+}
+
+.sect-3 .link-active {
+  color: var(--SEC-COLOR);
+  position: relative;
+}
+
+/* .sect-3 .link-active::after {
+  content: "";
+  width: 200px;
+  height: 20px;
+} */
+
+.sect-3 .link-active p::before {
+  content: "";
+
+  width: 100%;
+  height: 2px;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.7em;
+
+  background-color: var(--SEC-COLOR);
+}
+
+.sect-4 {
+  margin-top: 30px;
+  padding: 0 2.9%;
+  padding-top: 30px;
+
+  width: 100%;
+
+  background-color: white;
+}
+
+.sect-4 .err {
+  min-height: 50vh;
+  display: grid;
+  place-content: center;
+
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .sect-2 {
+    flex-direction: column;
+  }
 }

@@ -1,16 +1,29 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 import LgButton from "../components/LgButton";
-import { TUserObj } from "../types";
+import { Ttier, TUserComplete, TUserObj } from "../types";
 
 import backArr from "../img/back arrow.png";
 import userAvatar from "../img/user-avatar.png";
 import "../styles/UserDetails.css";
 import Tier from "../components/Tier";
+import { useState } from "react";
+import UserInfo from "../components/UserInfo";
+
+const pages = [
+  "General Details",
+  "Documents",
+  "Bank Details",
+  "Loans",
+  "Savings",
+  "App and System",
+] as const;
 
 const UserDetails = () => {
-  const user = useLoaderData() as TUserObj;
+  const user = useLoaderData() as TUserComplete;
   const navigate = useNavigate();
+
+  const [currentNav, setCurrentNav] = useState<string>(pages[0]);
 
   const handleBackPage = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -18,8 +31,10 @@ const UserDetails = () => {
     navigate(-1);
   };
 
-  // Render star image for user tier
-  const tier = () => {};
+  const handlePageChange =
+    (page: string) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      setCurrentNav(page);
+    };
 
   return (
     <>
@@ -34,7 +49,7 @@ const UserDetails = () => {
         </section>
         <section className="sect-2">
           <h1 className="bold">User Details</h1>
-          <div>
+          <div className="button-con">
             <LgButton
               color="rgba(228, 3, 59, 1)"
               status="Blacklisted"
@@ -57,22 +72,45 @@ const UserDetails = () => {
               <img src={userAvatar} alt="user avatar" height={40} width={40} />
             </figure>
             <div className="user-display">
-              <h2 className="bold">{"user.name"}</h2>
-              <p>LSQFf587g90</p>
+              <h2 className="bold">{`${user.name}`}</h2>
+              <p>{`${user.guid}`}</p>
             </div>
             <div className="vert"></div>
             <div className="user-display">
               <h4 className="bold">User's Tier</h4>
-              <p>
-                <Tier tier={1} />
-              </p>
+              <div className="tier">
+                <Tier tier={user.tier as Ttier} />
+              </div>
             </div>
             <div className="vert"></div>
             <div className="user-display">
-              <h2 className="bold">{`$user.cash`}</h2>
-              <p>{`user.acctNo/Providus Bank`}</p>
+              <h2 className="bold">{`₦${user.cash}`}</h2>
+              <p>{`${user.acctNo}/Providus Bank`}</p>
             </div>
           </div>
+          <nav>
+            {pages.map((page) => {
+              return (
+                <div
+                  // If the page is correct page, set the link to show it is active
+                  key={page}
+                  className={`${
+                    currentNav === page ? "link link-active " : "link"
+                  }`}
+                  onClick={handlePageChange(page)}
+                >
+                  <p>{page}</p>
+                </div>
+              );
+            })}
+          </nav>
+        </section>
+        <section className="sect-4">
+          {currentNav !== pages[0] ? (
+            <h1 className="err">Page Under Construction</h1>
+          ) : (
+            <UserInfo user={user} />
+          )}
         </section>
       </article>
     </>

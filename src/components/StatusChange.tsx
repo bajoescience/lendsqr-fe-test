@@ -3,7 +3,6 @@ import friendIcon from "../img/delete-friend.png";
 import activateIcon from "../img/active-user.png";
 import { changeUserstatus, stylePositioning } from "../helper";
 
-import { getUser, updateUser } from "../services/user";
 import { TStatus, TUserObj } from "../types";
 import { useEffect } from "react";
 

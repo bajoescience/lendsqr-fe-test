@@ -27,13 +27,34 @@ export type TDisplayStat = {
 export type TStatus = "Active" | "Inactive" | "Pending" | "Blacklisted" | "";
 
 export type TUserObj = {
-  id?: string;
+  id: string;
   organization: string;
   username: string;
   email: string;
   phone: string;
   date: string;
   status: TStatus;
+};
+
+export type TUserComplete = TUserObj & {
+  guid: string;
+  tier: Ttier;
+  name: string;
+  cash: string;
+  age: number;
+  acctNo: string;
+  gender: string;
+  generalDetails: [
+    {
+      title: "string";
+      values: [
+        {
+          title: string;
+          value: string;
+        }
+      ];
+    }
+  ];
 };
 
 // Define specific values for the paginate type
