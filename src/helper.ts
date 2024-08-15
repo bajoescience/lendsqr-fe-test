@@ -63,8 +63,10 @@ export const filterUsers = (
     let bool = true;
 
     Object.keys(user).forEach((key) => {
-      const userProperty = user[key as keyof TUserObj];
-      const match = filterSchema[key as keyof TUserObj] as string;
+      const userProperty = user[key as keyof TUserObj].toLocaleLowerCase();
+      const match = (
+        filterSchema[key as keyof TUserObj] as string
+      ).toLocaleLowerCase();
 
       if (!userProperty?.includes(match)) {
         bool = false;

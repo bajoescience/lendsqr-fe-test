@@ -78,7 +78,7 @@ const UserDetails = () => {
             <div className="vert"></div>
             <div className="user-display">
               <h4 className="bold">User's Tier</h4>
-              <div className="tier">
+              <div className="tier nowrap">
                 <Tier tier={user.tier as Ttier} />
               </div>
             </div>

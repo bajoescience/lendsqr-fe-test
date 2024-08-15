@@ -72,3 +72,7 @@
 .bold {
   font-weight: 500;
 }
+
+.nowrap {
+  text-wrap: nowrap;
+}

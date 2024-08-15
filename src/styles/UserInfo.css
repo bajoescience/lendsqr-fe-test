@@ -16,13 +16,13 @@
 
 .info-group-con {
   display: grid;
-  grid-template-columns: repeat(2, 1fr 0.87fr);
+  grid-template-columns: repeat(2, 1fr 1fr);
   row-gap: 30px;
+  column-gap: 20px;
   justify-content: space-between;
 }
 
 .info-group {
-  min-width: 100px;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -39,4 +39,22 @@
 
 .info-box hr {
   opacity: 30%;
+}
+
+@media (max-width: 1024px) {
+  .info-group-con {
+    grid-template-columns: repeat(1, 1fr 1fr 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .info-group-con {
+    grid-template-columns: repeat(1, 1fr 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .info-group-con {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

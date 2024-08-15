@@ -40,7 +40,7 @@ const UserInfoDict = ({
 
           // Make sure the income is displayed in naira
           if (group.title === "Monthly income") {
-            const incomeLimits = value.split("-");
+            const incomeLimits = value.split("- ");
             value = `₦${incomeLimits[0]} - ₦${incomeLimits[1]}`;
           }
 
@@ -59,7 +59,7 @@ const UserInfoDict = ({
           return (
             <div className="info-group" key={group.title}>
               <p className="key">{title}</p>
-              <p className="value">{value}</p>
+              <p className="value nowrap">{value}</p>
             </div>
           );
         })}
