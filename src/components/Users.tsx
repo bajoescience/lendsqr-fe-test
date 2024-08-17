@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { getUsers } from "../services/user";
 
 import UserHead from "./UserHead";
+import { changeUserType } from "../helper";
 
 const Users = () => {
   const [users, setUsers] = useState<TUserObj[] | null>(null);
@@ -19,17 +20,7 @@ const Users = () => {
       try {
         const rawUsers = (await getUsers()) as TUserComplete[];
 
-        const fetchedUsers: TUserObj[] = rawUsers.map((user) => {
-          return {
-            id: user.id,
-            organization: user.organization,
-            username: user.username,
-            email: user.email,
-            phone: user.phone,
-            date: user.date,
-            status: user.status,
-          };
-        });
+        const fetchedUsers = rawUsers.map(changeUserType);
 
         setUsers(fetchedUsers);
       } catch (error) {
@@ -37,7 +28,7 @@ const Users = () => {
       }
     };
     fetchUsers();
-  }, [users]);
+  }, []);
 
   return (
     <div className="main">

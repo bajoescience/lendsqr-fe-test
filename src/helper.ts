@@ -4,6 +4,7 @@ import {
   TUserObj,
   TDisplayStat,
   TStatus,
+  TUserComplete,
 } from "./types";
 
 // These are the Sidebar imports
@@ -40,16 +41,29 @@ export const stylePositioning = {
   left: "-3000px",
 };
 
+// Change a TUserComplete type to a TUserObj type
+export const changeUserType = (user: TUserComplete): TUserObj => {
+  return {
+    id: user.id,
+    organization: user.organization,
+    username: user.username,
+    email: user.email,
+    phone: user.phone,
+    date: user.date,
+    status: user.status,
+  };
+};
+
 // Change a user's status
 export const changeUserstatus = async (status: TStatus, userID: string) => {
   const userObj = (await getUser(userID)) as TUserObj;
 
-  const changedUser: TUserObj = {
+  const changedUser: TUserComplete = await updateUser(userID, {
     ...userObj,
     status: status,
-  };
-  await updateUser(userID, changedUser);
-  return changedUser;
+  });
+
+  return changeUserType(changedUser);
 };
 
 // Create a function that takes the users to be displayed

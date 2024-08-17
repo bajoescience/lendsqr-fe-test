@@ -61,6 +61,7 @@ const StatusChange = ({
       if (!user) return;
 
       const userObj = await changeUserstatus(status, user);
+      console.log(userObj);
 
       // save the updated user
       updateChangedUser(userObj);
