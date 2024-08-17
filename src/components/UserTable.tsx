@@ -9,8 +9,10 @@ import leftNavIcon from "../img/left-nav.png";
 import rightNavIcon from "../img/right-nav.png";
 import UserTableHead from "./UserTableHead";
 import UserTableBody from "./UserTableBody";
-import UserFilter from "./UserFilter";
-import StatusChange from "./StatusChange";
+
+import { lazy, Suspense } from "react";
+const UserFilter = lazy(() => import("./UserFilter"));
+const StatusChange = lazy(() => import("./StatusChange"));
 
 const UserTable = ({
   users,
@@ -200,11 +202,6 @@ const UserTable = ({
         </table>
       </div>
 
-      {/* Filter form that is toggled */}
-      <UserFilter
-        filterSchema={filterSchema}
-        setFilterSchema={setFilterSchema}
-      />
       <div className="paginate-con">
         <div>
           Showing
@@ -226,12 +223,20 @@ const UserTable = ({
         </nav>
       </div>
 
-      {/* This is the status Change card */}
-      <StatusChange
-        user={anchor_id}
-        setanchor_id={setanchor_id}
-        updateChangedUser={updateChangedUser}
-      />
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* Filter form that is toggled */}
+        <UserFilter
+          filterSchema={filterSchema}
+          setFilterSchema={setFilterSchema}
+        />
+
+        {/* This is the status Change card */}
+        <StatusChange
+          user={anchor_id}
+          setanchor_id={setanchor_id}
+          updateChangedUser={updateChangedUser}
+        />
+      </Suspense>
     </>
   );
 };

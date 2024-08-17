@@ -1,7 +1,8 @@
 import axios from "axios";
 import { TUserObj } from "../types";
 
-const baseUrl = "http://localhost:3001/users";
+const prod = false;
+const baseUrl = prod ? "/api/users" : "http://localhost:3001/users";
 
 const getUser = async (id: string) => {
   const res = await axios.get(`${baseUrl}/${id}`);
