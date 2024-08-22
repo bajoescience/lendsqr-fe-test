@@ -8,6 +8,11 @@ const UserBox = ({ stat }: { stat: TDisplayStat }) => {
   // Render the count value as a smooth transition
   useEffect(() => {
     if (count >= stat.count) {
+      // If the stat is changed, make the count
+      // the value of stat
+      if (stat.count !== count) {
+        setCount(stat.count);
+      }
       return;
     }
     const interval = setInterval(() => {
