@@ -1,34 +1,33 @@
-import { useRef } from "react"
-import { TDisplayStat } from "../types"
+import { useEffect, useState } from "react";
+import { TDisplayStat } from "../types";
 
 // Display each users info in this box component
-const UserBox = ({stat} : {stat: TDisplayStat}) => {
+const UserBox = ({ stat }: { stat: TDisplayStat }) => {
+  const [count, setCount] = useState(0);
 
-  // Keep the user stats to update as a mutable ref
-  const countRef = useRef(stat.count)
+  // Render the count value as a smooth transition
+  useEffect(() => {
+    if (count >= stat.count) {
+      return;
+    }
+    const interval = setInterval(() => {
+      setCount(count + 1);
+    }, 1);
 
-  // const statObj = useRef({
-  //   totalCount: displayStats[0].count,
-  //   activeCount: displayStats[1].count,
-  //   loanCount: displayStats[2].count,
-  //   savingsCount: displayStats[3].count
-  // })
-
-  
+    return () => {
+      clearInterval(interval);
+    };
+  }, [count, stat]);
 
   return (
     <div className="box">
-          <div>
-            <img src={stat.icon} alt="users" />
-          </div>
-          <div className='box-name'>
-            {stat.name}
-          </div>
-          <div className='box-count'>
-            {stat.count.toLocaleString()}
-          </div>
+      <div>
+        <img src={stat.icon} alt="users" />
+      </div>
+      <div className="box-name">{stat.name}</div>
+      <div className="box-count">{count.toLocaleString()}</div>
     </div>
-  )
-}
+  );
+};
 
-export default UserBox
+export default UserBox;

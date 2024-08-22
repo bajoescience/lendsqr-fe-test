@@ -11,26 +11,31 @@ const UserHead = ({ users }: { users: TUserObj[] | null }) => {
   // // If the user array changes, the stats state changes also
   useEffect(() => {
     const fetchCount = async () => {
-      const activeUsersCount = await getUserCount({ status: "Active" });
-      const totalUsersCount = await getUserCount();
+      try {
+        const activeUsersCount = await getUserCount({ status: "Active" });
+        const totalUsersCount = await getUserCount();
 
-      const newStats = displayStats.map((stat) => {
-        if (stat.name === "USERS") {
-          return {
-            ...stat,
-            count: totalUsersCount,
-          };
-          // Return the count of the active users
-        } else if (stat.name === "ACTIVE USERS") {
-          return {
-            ...stat,
-            count: activeUsersCount,
-          };
-        } else {
-          return stat;
-        }
-      });
-      setStats(newStats);
+        const newStats = displayStats.map((stat) => {
+          if (stat.name === "USERS") {
+            return {
+              ...stat,
+              count: totalUsersCount,
+            };
+            // Return the count of the active users
+          } else if (stat.name === "ACTIVE USERS") {
+            return {
+              ...stat,
+              count: activeUsersCount,
+            };
+          } else {
+            return stat;
+          }
+        });
+        setStats(newStats);
+      } catch (error) {
+        console.log(error);
+        return;
+      }
     };
     fetchCount();
   }, [users]);

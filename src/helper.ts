@@ -102,12 +102,12 @@ export const displayStats: TDisplayStat[] = [
   },
   {
     name: "USERS WITH LOANS",
-    count: 12453,
+    count: 1245,
     icon: loanusersIcon,
   },
   {
     name: "USERS WITH SAVINGS",
-    count: 102453,
+    count: 12453,
     icon: savingusersIcon,
   },
 ];
