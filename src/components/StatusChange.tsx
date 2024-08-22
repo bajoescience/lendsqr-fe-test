@@ -26,11 +26,11 @@ const viewArr = [
 ] as const;
 
 const StatusChange = ({
-  user,
-  setanchor_id,
   updateChangedUser,
+  anchor_id,
+  setanchor_id,
 }: {
-  user: string | null;
+  anchor_id: string | null;
   setanchor_id: React.Dispatch<React.SetStateAction<string | null>>;
   updateChangedUser: (changedUser: TUserObj) => null | undefined;
 }) => {
@@ -38,30 +38,31 @@ const StatusChange = ({
 
   // Hide the status card when not in use
   useEffect(() => {
-    if (!user) {
+    if (!anchor_id) {
       (document.getElementById("statusCard") as HTMLDivElement).style.left =
         stylePositioning.left;
     }
-  }, [user]);
+  }, [anchor_id]);
 
   // These are the event handler func for each option
+  // Redirect the client to the Full user page
   const handleViewDetails = () => {
-    // TODO: Go to the next page
+    // Go to the next page
     return (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      navigate(`/dashboard/userdetails/${user}`);
+      navigate(`/dashboard/userdetails/${anchor_id}`);
 
       // Close the card
       setanchor_id(null);
     };
   };
 
+  // Change the user status
   const handleUserChange = (status: TStatus) => {
     return async (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       // Fetch the user and change the status
-      if (!user) return;
+      if (!anchor_id) return;
 
-      const userObj = await changeUserstatus(status, user);
-      console.log(userObj);
+      const userObj = await changeUserstatus(status, anchor_id);
 
       // save the updated user
       updateChangedUser(userObj);

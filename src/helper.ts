@@ -34,7 +34,7 @@ import usersIcon from "./img/USERS.png";
 import activeusersIcon from "./img/ACTIVE USERS.png";
 import loanusersIcon from "./img/USERS WITH LOANS.png";
 import savingusersIcon from "./img/USERS WITH SAVINGS.png";
-import { getUser, updateUser } from "./services/user";
+import { updateUser } from "./services/user";
 
 // Make an element disappear
 export const stylePositioning = {
@@ -56,44 +56,9 @@ export const changeUserType = (user: TUserComplete): TUserObj => {
 
 // Change a user's status
 export const changeUserstatus = async (status: TStatus, userID: string) => {
-  const userObj = (await getUser(userID)) as TUserObj;
-
-  const changedUser: TUserComplete = await updateUser(userID, {
-    ...userObj,
-    status: status,
-  });
+  const changedUser: TUserComplete = await updateUser(userID, { status });
 
   return changeUserType(changedUser);
-};
-
-// Create a function that takes the users to be displayed
-// and filters them using the schema
-// submitted by the filter form
-export const filterUsers = (
-  users: TUserObj[] | null,
-  filterSchema: TUserObj
-): TUserObj[] | null => {
-  const filteredUsers = users?.filter((user) => {
-    let bool = true;
-
-    Object.keys(user).forEach((key) => {
-      const userProperty = user[key as keyof TUserObj].toLocaleLowerCase();
-      const match = (
-        filterSchema[key as keyof TUserObj] as string
-      ).toLocaleLowerCase();
-
-      if (!userProperty?.includes(match)) {
-        bool = false;
-      }
-    });
-    return bool;
-  });
-
-  if (!filteredUsers || filteredUsers.length === 0) {
-    return null;
-  }
-
-  return filteredUsers;
 };
 
 export const validateEmail = (email: string): boolean => {
@@ -122,26 +87,6 @@ export const tHeaders = [
 
 // List of possible pagination values for users table
 export const paginateArray: TPaginate[] = [10, 20, 30, 50, 100];
-
-// Function that divides the users array by pagination
-export const paginateFunc = ({
-  page,
-  diff,
-  users,
-}: {
-  page: number;
-  diff: TPaginate;
-  users: TUserObj[] | null;
-}): TUserObj[] | null => {
-  // Get the start and end of the paginate string
-  const start = 0 + (page - 1) * diff;
-  const end = diff * page;
-  const userSlice = users?.slice(start, end);
-  if (!userSlice) {
-    return null;
-  }
-  return userSlice;
-};
 
 // Display the user stats for the user page box
 export const displayStats: TDisplayStat[] = [

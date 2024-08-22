@@ -1,15 +1,31 @@
-import { TStatus, TUserObj } from "../types";
+import { tHead, TStatus, TUserObj } from "../types";
 import { stylePositioning } from "../helper";
 
 import "../styles/Filter.css";
+import { useEffect } from "react";
 
 type TUserFilter = {
-  setFilterSchema: React.Dispatch<React.SetStateAction<TUserObj>>;
-  filterSchema: TUserObj;
+  setFilterSchema: React.Dispatch<React.SetStateAction<Partial<TUserObj>>>;
+  filterSchema: Partial<TUserObj>;
+  filterCon: tHead | "";
+  setFilterCon: React.Dispatch<React.SetStateAction<"" | tHead>>;
 };
 
-const UserFilter = ({ setFilterSchema, filterSchema }: TUserFilter) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const UserFilter = ({
+  setFilterSchema,
+  filterSchema,
+  filterCon,
+  setFilterCon,
+}: TUserFilter) => {
+  // Hide the filter form when not in use
+  useEffect(() => {
+    if (filterCon === "") {
+      (document.getElementById("filter") as HTMLDivElement).style.left =
+        stylePositioning.left;
+    }
+  }, [filterCon]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const organization = (data.get("organization") as string) || "";
@@ -19,18 +35,20 @@ const UserFilter = ({ setFilterSchema, filterSchema }: TUserFilter) => {
     const phone = (data.get("phone") as string) || "";
     const status = (data.get("status") as TStatus) || "";
 
-    const filterSchema: TUserObj = {
+    const filterSchema: Partial<TUserObj> = {
       organization,
       username,
       email,
       date,
       phone,
       status,
-      id: "",
     };
 
     // Sets the filter schema to the filter schema given by the form
     setFilterSchema(filterSchema);
+
+    // Close the form
+    setFilterCon("");
   };
 
   return (

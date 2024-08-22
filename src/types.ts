@@ -60,6 +60,11 @@ export type TUserComplete = TUserObj & {
 // Define specific values for the paginate type
 export type TPaginate = 10 | 20 | 30 | 50 | 100;
 
+export type TPaginateObj = {
+  page: number;
+  diff: TPaginate;
+};
+
 // This is the list of headers
 export type tHead =
   | "status"

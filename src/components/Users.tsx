@@ -5,26 +5,20 @@ import { TUserObj } from "../types";
 import UserTable from "./UserTable";
 
 import UserHead from "./UserHead";
+import { useState } from "react";
 
-const Users = ({
-  users,
-  setUsers,
-  activeUsersCount,
-  totalUsersCount,
-}: {
-  users: TUserObj[] | null;
-  setUsers: React.Dispatch<React.SetStateAction<TUserObj[] | null>>;
-  activeUsersCount: number;
-  totalUsersCount: number;
-}) => {
+const Users = () => {
+  // This is the list of users filtered according to the filterSchema
+  const [filteredUsers, setFilteredUsers] = useState<TUserObj[] | null>(null);
+
   return (
     <div className="main">
       <h2>Users</h2>
-      <UserHead
-        activeUsersCount={activeUsersCount}
-        totalUsersCount={totalUsersCount}
+      <UserHead users={filteredUsers} />
+      <UserTable
+        filteredUsers={filteredUsers}
+        setFilteredUsers={setFilteredUsers}
       />
-      <UserTable users={users} setUsers={setUsers} />
     </div>
   );
 };

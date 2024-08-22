@@ -1,6 +1,12 @@
-import { TUserObj, TPaginate } from "../types";
+import {
+  TUserObj,
+  TPaginate,
+  TPaginateObj,
+  tHead,
+  TUserComplete,
+} from "../types";
 
-import { paginateArray, paginateFunc, filterUsers } from "../helper";
+import { changeUserType, paginateArray } from "../helper";
 
 import { useState, useEffect } from "react";
 
@@ -11,82 +17,108 @@ import UserTableHead from "./UserTableHead";
 import UserTableBody from "./UserTableBody";
 
 import { lazy, Suspense } from "react";
+import { getUserCount, getUsers } from "../services/user";
 const UserFilter = lazy(() => import("./UserFilter"));
 const StatusChange = lazy(() => import("./StatusChange"));
 
 const UserTable = ({
-  users,
-  setUsers,
+  filteredUsers,
+  setFilteredUsers,
 }: {
-  users: TUserObj[] | null;
-  setUsers: React.Dispatch<React.SetStateAction<TUserObj[] | null>>;
+  filteredUsers: TUserObj[] | null;
+  setFilteredUsers: React.Dispatch<React.SetStateAction<TUserObj[] | null>>;
 }) => {
   // This object is the schema by which users are filtered
-  const [filterSchema, setFilterSchema] = useState<TUserObj>({
+  const [filterSchema, setFilterSchema] = useState<Partial<TUserObj>>({
     organization: "",
     username: "",
     email: "",
     phone: "",
     date: "",
     status: "",
-    id: "",
   });
 
-  // This is the list of users filtered according to the filterSchema
-  const [filteredUsers, setFilteredUsers] = useState<TUserObj[] | null>(null);
+  // page?: number, diff?: number, resource?: TUserObj
 
   // diff: How many users is displayed per page.
   // page: This is the page number for the users display.
   // pageCount: This is the total amount of pages which is related to the number of users.
-  const [paginate, setPaginate] = useState<{
-    diff: TPaginate;
-    page: number;
-    pageCount?: number;
-  }>({
+  const [paginate, setPaginate] = useState<TPaginateObj>({
     diff: 10,
-    page: 1,
+    page: 0,
   });
+
+  const [userCount, setUserCount] = useState(0);
 
   // Store the user-id that the status change component is anchored to
   const [anchor_id, setanchor_id] = useState<string | null>(null);
 
+  // Store the name of the table header that the filter component is currently anchored to.
+  const [filterCon, setFilterCon] = useState<tHead | "">("");
+
+  // Always filter the users to be displayed
+  // by the filter schema
   useEffect(() => {
-    setFilteredUsers(filterUsers(users, filterSchema));
-  }, [users, filterSchema]);
+    const fetchUsers = async () => {
+      try {
+        const rawUsers: TUserComplete[] = await getUsers(
+          paginate,
+          filterSchema
+        );
+
+        // Fetch users and count length of active and total users
+        const fetchedUsers = rawUsers.map(changeUserType);
+
+        if (!fetchedUsers || fetchedUsers.length === 0) {
+          return;
+        }
+
+        setFilteredUsers(fetchedUsers);
+      } catch (error) {
+        setFilteredUsers(null);
+      }
+    };
+
+    fetchUsers();
+  }, [filterSchema, setFilteredUsers, paginate]);
 
   useEffect(() => {
-    // filter the users
+    // Make sure the users are filtered
     if (!filteredUsers) return;
 
-    // Get the number of pages
-    setPaginate({
-      ...paginate,
-      pageCount: Math.ceil(filteredUsers.length / paginate.diff),
-    });
-  }, [filteredUsers, paginate.diff]);
+    // Get total number of filtered users
+    // from database
+    const getTotalCount = async () => {
+      try {
+        const totalCount: number = await getUserCount(filterSchema);
 
-  // Change the users array to add updated user
+        // Store the total number of filtered users in state
+        setUserCount(totalCount);
+      } catch (error) {
+        setUserCount(0);
+      }
+    };
+
+    getTotalCount();
+  }, [filteredUsers, filterSchema]);
+
+  // Change the users array to reflect updated user
   const updateChangedUser = (changedUser: TUserObj): null | undefined => {
-    if (!users) return;
+    if (!filteredUsers) return;
 
-    setUsers(() =>
-      users.map((user) => (user.id !== changedUser.id ? user : changedUser))
+    setFilteredUsers(() =>
+      filteredUsers.map((user) =>
+        user.id !== changedUser.id ? user : changedUser
+      )
     );
   };
-
-  // Display users that have been divided by pagination
-  const usersToDisplay = paginateFunc({
-    page: paginate.page,
-    diff: paginate.diff,
-    users: filteredUsers,
-  });
 
   // When the select option changes
   // We set the page number back to 1
   const handlePaginateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPaginate({
       ...paginate,
-      page: 1,
+      page: 0,
       diff: e.target.value as unknown as TPaginate,
     });
   };
@@ -94,12 +126,13 @@ const UserTable = ({
   // Handle the change in page navigation/number
   // nav_type can only have two values
   const handlePageChange = (nav_type: "prev" | "next") => {
-    const { page, pageCount } = paginate;
+    const pageCount = Math.ceil(userCount / paginate.diff);
+    const { page } = paginate;
 
     // Previous button clicked
     if (nav_type === "prev") {
       return (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        if (page === 1) {
+        if (page === 0) {
           return;
         }
         setPaginate({ ...paginate, page: page - 1 });
@@ -119,7 +152,8 @@ const UserTable = ({
 
   // Render what the pagination display is like
   const paginationDisplay = () => {
-    const { pageCount, page } = paginate;
+    const pageCount = Math.ceil(userCount / paginate.diff);
+    const page = paginate.page + 1;
 
     const displayArr = Array.from(Array(pageCount).keys()).map((i) => i + 1);
     return (
@@ -138,7 +172,7 @@ const UserTable = ({
               <span
                 key={number}
                 onClick={() => {
-                  setPaginate({ ...paginate, page: number });
+                  setPaginate({ ...paginate, page: number - 1 });
                 }}
                 className={
                   number === page ? "page-span pag-active" : "page-span"
@@ -153,20 +187,21 @@ const UserTable = ({
             return <span key={number}>...</span>;
           }
 
-          return;
+          return null;
         })}
       </>
     );
   };
 
   // Display the appropiate number of users
+  // in the select bar of the pagination
   const seclectDisplay = () => {
     if (!filteredUsers) {
       return <option value={0}>0</option>;
 
       // If users is less than 10, display only that
-    } else if (filteredUsers.length < 10) {
-      const length = filteredUsers.length;
+    } else if (userCount < 10) {
+      const length = userCount;
       return <option value={length}>{length}</option>;
 
       // If users is greater than 10, display as a full select
@@ -174,7 +209,7 @@ const UserTable = ({
       return paginateArray.map((opt) => {
         // Do not let the select option
         // display a value greater than the length of users
-        if (opt > filteredUsers.length) {
+        if (opt > userCount) {
           return null;
         }
         return (
@@ -191,13 +226,13 @@ const UserTable = ({
       <div className="table-con">
         <table>
           {/* Render the head of the user */}
-          <UserTableHead />
+          <UserTableHead filterCon={filterCon} setFilterCon={setFilterCon} />
 
           {/* Render each user as a row */}
           <UserTableBody
             anchor_id={anchor_id}
             setanchor_id={setanchor_id}
-            users={filterUsers(usersToDisplay, filterSchema)}
+            users={filteredUsers}
           />
         </table>
       </div>
@@ -210,7 +245,7 @@ const UserTable = ({
               {seclectDisplay()}
             </select>
           </span>
-          out of {!filteredUsers ? 0 : filteredUsers.length}
+          out of {!filteredUsers ? 0 : userCount}
         </div>
         <nav>
           <button className="pag-nav-butt" onClick={handlePageChange("prev")}>
@@ -228,11 +263,13 @@ const UserTable = ({
         <UserFilter
           filterSchema={filterSchema}
           setFilterSchema={setFilterSchema}
+          filterCon={filterCon}
+          setFilterCon={setFilterCon}
         />
 
         {/* This is the status Change card */}
         <StatusChange
-          user={anchor_id}
+          anchor_id={anchor_id}
           setanchor_id={setanchor_id}
           updateChangedUser={updateChangedUser}
         />

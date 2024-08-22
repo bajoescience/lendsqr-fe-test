@@ -25,8 +25,7 @@ const LgButton = ({ children, color, status, userId }: TButtonProps) => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     // Change user status
-    const newUser = await changeUserstatus(status, userId as string);
-    console.log(newUser);
+    await changeUserstatus(status, userId as string);
   };
 
   return (

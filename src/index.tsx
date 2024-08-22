@@ -13,11 +13,12 @@ import { getUser } from "./services/user";
 
 import { lazy, Suspense } from "react";
 
-import Dashboard from "./routes/Dashboard";
-import Main from "./routes/Main";
+// import Dashboard from "./routes/Dashboard";
+// import Main from "./routes/Main";
 
 const Auth = lazy(() => import("./routes/Auth"));
-
+const Main = lazy(() => import("./routes/Main"));
+const Dashboard = lazy(() => import("./routes/Dashboard"));
 const UserDetails = lazy(() => import("./routes/UserDetails"));
 
 const root = ReactDOM.createRoot(
@@ -33,19 +34,23 @@ const routeTree: RouteObject[] = [
       {
         path: "auth",
         element: (
-          <Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
             <Auth />
           </Suspense>
         ),
       },
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: (
+          <Suspense>
+            <Dashboard />
+          </Suspense>
+        ),
         children: [
           {
             path: "userdetails/:userID",
             element: (
-              <Suspense>
+              <Suspense fallback={<div>Loading...</div>}>
                 <UserDetails />
               </Suspense>
             ),
@@ -57,11 +62,19 @@ const routeTree: RouteObject[] = [
           },
           {
             path: ":link",
-            element: <Main />,
+            element: (
+              <Suspense>
+                <Main />
+              </Suspense>
+            ),
           },
           {
             path: "",
-            element: <Main />,
+            element: (
+              <Suspense>
+                <Main />
+              </Suspense>
+            ),
           },
         ],
       },
