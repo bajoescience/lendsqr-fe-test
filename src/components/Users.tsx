@@ -4,8 +4,10 @@ import { TUserObj } from "../types";
 
 import UserTable from "./UserTable";
 
-import UserHead from "./UserHead";
-import { useState } from "react";
+// import UserHead from "./UserHead";
+import { lazy, Suspense, useState } from "react";
+
+const UserHead = lazy(() => import("./UserHead"));
 
 const Users = () => {
   // This is the list of users filtered according to the filterSchema
@@ -14,7 +16,9 @@ const Users = () => {
   return (
     <div className="main">
       <h2>Users</h2>
-      <UserHead users={filteredUsers} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <UserHead users={filteredUsers} />
+      </Suspense>
       <UserTable
         filteredUsers={filteredUsers}
         setFilteredUsers={setFilteredUsers}

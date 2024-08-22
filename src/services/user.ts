@@ -1,7 +1,7 @@
 import axios from "axios";
 import { TPaginateObj, TUserObj } from "../types";
 
-const prod = true;
+const prod = false;
 const baseUrl = prod ? "/api/users" : "http://localhost:3001/api/users";
 
 const getUserCount = async (filterOpts?: Partial<TUserObj>) => {
